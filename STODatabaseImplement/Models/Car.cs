@@ -41,5 +41,10 @@ namespace STODatabaseImplement.Models
         /// </summary>
         [ForeignKey("CarId")]
         public virtual List<CarSparePart> CarSpareParts { get; set; }
+
+        public int EmpoyeeId { get; set; }
+
+        public virtual Employee Employee { get; set; }
+
     }
 }
