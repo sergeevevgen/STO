@@ -20,6 +20,6 @@ namespace STOContracts.BindingModels
         /// <summary>
         /// Необходимые детали и расходники (int - id, string - название, int - кол-во)
         /// </summary>
-        public Dictionary<int, (string, int)> WorkSpareParts { get; set; }
+        public Dictionary<int, (string, decimal)> WorkSpareParts { get; set; }
     }
 }
