@@ -13,16 +13,7 @@ namespace STODatabaseImplement.Implements
 {
     public class TOStorage : ITOStorage
     {
-        public List<TOViewModel> GetFullList()
-        {
-            using var context = new STODatabase();
-            return context.TOs
-            .Include(rec => rec.DepositClients)
-            .ThenInclude(rec => rec.Client)
-            .ToList()
-            .Select(CreateModel)
-            .ToList();
-        }
+       
 
     }
 }
