@@ -17,6 +17,6 @@ namespace STOContracts.Enums
 
         Готов = 2,
 
-        Выдан = 3
+        Выдан_клиенту = 3
     }
 }

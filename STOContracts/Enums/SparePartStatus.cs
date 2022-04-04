@@ -8,8 +8,8 @@ namespace STOContracts.Enums
 {
     public enum SparePartStatus
     {
-        На_складе = 0,
+        БУ = 0,
 
-        Отсутствует = 1
+        Оригинал = 1
     }
 }

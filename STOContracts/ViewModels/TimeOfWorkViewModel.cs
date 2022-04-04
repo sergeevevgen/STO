@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace STOContracts.ViewModels
 {
-    public class TimeOfWorkViewModelcs
+    public class TimeOfWorkViewModel
     {
         public int Id { get; set; }
 

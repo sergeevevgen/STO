@@ -19,10 +19,13 @@ namespace STOContracts.ViewModels
         [DisplayName("Статус")]
         public string Status { get; set; }
 
-        [DisplayName("Дата начала ТО")]
+        [DisplayName("Дата оформления ТО")]
         public DateTime DateCreate { get; set; }
 
-        [DisplayName("Дата завершения ТО")]
+        [DisplayName("Дата начала выполнения ТО")]
         public DateTime? DateImplement { get; set; }
+
+        [DisplayName("Дата завершения ТО")]
+        public DateTime? DateOver { get; set; }
     }
 }

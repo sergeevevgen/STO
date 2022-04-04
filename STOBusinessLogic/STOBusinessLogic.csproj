@@ -10,8 +10,4 @@
     <ProjectReference Include="..\STOContracts\STOContracts.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BusinessLogics\" />
-  </ItemGroup>
-
 </Project>
