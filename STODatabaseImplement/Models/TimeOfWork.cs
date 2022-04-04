@@ -18,6 +18,6 @@ namespace STODatabaseImplement.Models
         /// Внешний ключ (связь один ко многим)
         /// </summary>
         [ForeignKey("TimeOfWorkId")]
-        public virtual List<WorkTimeOfWork> WorkTimeOfWorks { get; set; }
+        public virtual List<Work> Works { get; set; }
     }
 }

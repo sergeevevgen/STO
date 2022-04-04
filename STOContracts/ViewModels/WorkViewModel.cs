@@ -17,6 +17,6 @@ namespace STOContracts.ViewModels
 
         [DisplayName("Стоимость с учётом запчастей")]
         public decimal NetPrice { get; set; }
-        public Dictionary<int, (string, int)> WorkSpareParts { get; set; }
+        public Dictionary<int, (string, decimal)> WorkSpareParts { get; set; }
     }
 }

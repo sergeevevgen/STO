@@ -32,6 +32,5 @@ namespace STODatabaseImplement
         public virtual DbSet<TOWork> TOWorks  { get; set; }
         public virtual DbSet<Work> Works { get; set; }
         public virtual DbSet<WorkSparePart> WorkSpareParts { get; set; }
-        public virtual DbSet<WorkTimeOfWork> WorkTimeOfWorks { get; set; }
     }
 }

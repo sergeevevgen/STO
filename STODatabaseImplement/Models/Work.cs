@@ -16,12 +16,7 @@ namespace STODatabaseImplement.Models
         [Required]
         public decimal NetPrice { get; set; }
 
-        /// <summary>
-        /// Внешний ключ (связь один ко многим)
-        /// </summary>
-        [ForeignKey("WorkId")]
-        public virtual List<WorkTimeOfWork> WorkTimeOfWorks { get; set; }
-
+        public int TimeOfWorkId { get; set; }
         /// <summary>
         /// Внешний ключ (связь один ко многим)
         /// </summary>
@@ -33,5 +28,6 @@ namespace STODatabaseImplement.Models
         /// </summary>
         [ForeignKey("WorkId")]
         public virtual List<TOWork> TOWorks { get; set; }
+        public virtual TimeOfWork TimeOfWork { get; set; }
     }
 }
