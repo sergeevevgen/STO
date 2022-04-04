@@ -36,8 +36,7 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             var timeOfWork = context.TimeOfWorks
-            .FirstOrDefault(rec => rec.Id
-            == model.Id);
+                .FirstOrDefault(rec => rec.Id == model.Id);
             return timeOfWork != null ? CreateModel(timeOfWork) : null;
         }
 
@@ -49,17 +48,17 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             return context.TimeOfWorks
-            .Where(rec => rec.Id.Equals(model.Id))
-            .Select(CreateModel)
-            .ToList();
+                .Where(rec => rec.Id.Equals(model.Id))
+                .Select(CreateModel)
+                .ToList();
         }
 
         public List<TimeOfWorkViewModel> GetFullList()
         {
             using var context = new STODatabase();
             return context.TimeOfWorks
-            .Select(CreateModel)
-            .ToList();
+                .Select(CreateModel)
+                .ToList();
         }
 
         public void Insert(TimeOfWorkBindingModel model)
