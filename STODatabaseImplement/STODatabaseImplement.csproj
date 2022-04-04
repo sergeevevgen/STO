@@ -19,8 +19,4 @@
     <ProjectReference Include="..\STOContracts\STOContracts.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implements\" />
-  </ItemGroup>
-
 </Project>
