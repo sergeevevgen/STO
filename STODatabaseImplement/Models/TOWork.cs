@@ -14,7 +14,7 @@ namespace STODatabaseImplement.Models
         public int WorkId { get; set; }
 
         [Required]
-        public int Count { get; set; }
+        public decimal Count { get; set; }
         public virtual TO TO { get; set; }
         public virtual Work Work { get; set; }
     }

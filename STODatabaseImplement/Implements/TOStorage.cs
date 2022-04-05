@@ -57,7 +57,7 @@ namespace STODatabaseImplement.Implements
             .ThenInclude(rec => rec.Car)
             .Include(rec => rec.TOWorks)
             .ThenInclude(rec => rec.Work)
-            .Where(rec => rec.WorkName.Contains(model.WorkName))
+            .Where(rec => rec.Id.Equals(model.Id))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -127,6 +127,48 @@ namespace STODatabaseImplement.Implements
             }
         }
 
+        private static TO CreateModel(TOBindingModel model, TO tO, STODatabase context)
+        {
+            tO.Sum = model.Sum;
+            tO.Status = model.Status;
+            tO.DateCreate = model.DateCreate;
+            tO.DateImplement = model.DateImplement;
+            tO.DateOver = model.DateOver;
+            if (model.Id.HasValue)
+            {
+                var tOWorks = context.TOWorks
+                    .Where(rec => rec.TOId == model.Id.Value)
+                    .ToList();
+
+                context.TOWorks
+                    .RemoveRange(tOWorks
+                    .Where(rec => !model.TOWorks
+                    .ContainsKey(rec.WorkId))
+                    .ToList());
+                context.SaveChanges();
+
+                foreach (var update in tOWorks)
+                {
+                    update.Count =
+                        model.TOWorks[update.TOId].Item2;
+                    model.TOWorks.Remove(update.WorkId);
+                }
+                context.SaveChanges();
+            }
+
+            foreach (var uwsp in model.TOWorks)
+            {
+                context.TOWorks.Add(new TOWork
+                {
+                    TOId = model.Id.Value,
+                    WorkId = uwsp.Key,
+                    Count = uwsp.Value.Item2
+                });
+                context.SaveChanges();
+            }
+            return tO;
+        }
+
         private static TOViewModel CreateModel(TO to)
         {
             return new TOViewModel
@@ -137,7 +179,7 @@ namespace STODatabaseImplement.Implements
                 DateCreate = to.DateCreate,
                 TOWorks = to.TOWorks
                 .ToDictionary(recPC => recPC.TOId,
-                recPC => (recPC.TO?.Status.ToString, recPC.Count))
+                recPC => (recPC.TO?.Status.ToString(), recPC.Count))
             };
         }
     }

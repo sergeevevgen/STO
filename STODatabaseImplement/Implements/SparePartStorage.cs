@@ -90,7 +90,7 @@ namespace STODatabaseImplement.Implements
                     FactoryNumber = model.FactoryNumber,
                     Price = model.Price
                 };
-                context.Works.Add(sparePart);
+                context.SpareParts.Add(sparePart);
                 context.SaveChanges();
                 CreateModel(model, sparePart, context);
                 transaction.Commit();
@@ -133,9 +133,9 @@ namespace STODatabaseImplement.Implements
                 SparePartName = sparePart.SparePartName,
                 FactoryNumber = sparePart.FactoryNumber,
                 Price = sparePart.Price,
-                Cars = sparePart.Cars.ToString(),
-                .ToDictionary(recPC => recPC.с,
-                recPC => (recPC.SparePart?.SparePartName, recPC.Count))
+                Cars = sparePart.CarSpareParts
+                .ToDictionary(recPC => recPC.SparePartId,
+                recPC => recPC.Car.CarBrand)
             };
         }
 
@@ -147,36 +147,19 @@ namespace STODatabaseImplement.Implements
             sparePart.FactoryNumber = model.FactoryNumber;
             if (model.Id.HasValue)
             {
-                var workSpareParts = context.WorkSpareParts
-                    .Where(rec => rec.WorkId == model.Id.Value)
+                var carSpareParts = context.CarSpareParts
+                    .Where(rec => rec.SparePartId == model.Id)
                     .ToList();
 
-                context.WorkSpareParts
-                    .RemoveRange(workSpareParts
-                    .Where(rec => !model.WorkSpareParts
-                    .ContainsKey(rec.SparePartId))
+                context.CarSpareParts
+                    .RemoveRange(carSpareParts
+                    .Where(rec => !model.Cars
+                    .ContainsKey(rec.CarId))
                     .ToList());
-                context.SaveChanges();
-
-                foreach (var update in workSpareParts)
-                {
-                    update.Count =
-                        model.WorkSpareParts[update.WorkId].Item2;
-                    model.WorkSpareParts.Remove(update.WorkId);
-                }
+                    
                 context.SaveChanges();
             }
 
-            foreach (var uwsp in model.WorkSpareParts)
-            {
-                context.WorkSpareParts.Add(new WorkSparePart
-                {
-                    WorkId = sparePart.Id,
-                    SparePartId = uwsp.Key,
-                    Count = uwsp.Value.Item2
-                });
-                context.SaveChanges();
-            }
             return sparePart;
         }
     }
