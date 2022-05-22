@@ -12,8 +12,8 @@ namespace STOContracts.BindingModels
 
         public string FIO { get; set; }
 
-        public string login { get; set; }
+        public string Login { get; set; }
 
-        public int password { get; set; }
+        public int Password { get; set; }
     }
 }
