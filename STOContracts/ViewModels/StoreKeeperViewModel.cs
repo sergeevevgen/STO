@@ -13,9 +13,9 @@ namespace STOContracts.ViewModels
         [DisplayName("ФИО")]
         public string FIO { get; set; }
         [DisplayName("Логин")]
-        public string login { get; set; }
+        public string Login { get; set; }
 
         [DisplayName("Пароль")]
-        public string password { get; set; }
+        public string Password { get; set; }
     }
 }

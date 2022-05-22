@@ -10,6 +10,7 @@ namespace STOContracts.BindingModels
     {
         public int? Id { get; set; }
         public string WorkName { get; set; }
+        public int? StoreKeeperId { get; set; }
 
         /// <summary>
         /// Время выполнения работы

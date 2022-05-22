@@ -18,6 +18,7 @@ namespace STOContracts.BindingModels
         /// Авто
         /// </summary>
         public int CarId { get; set; }
+        public int? EmployeeId { get; set; }
 
         /// <summary>
         /// Работы ТО
