@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using STOContracts.Enums;
 
 namespace STOContracts.BindingModels
 {
@@ -21,6 +22,7 @@ namespace STOContracts.BindingModels
         /// </summary>
         public decimal Price { get; set; }
         public decimal NetPrice { get; set; }
+        public WorkStatus WorkStatus { get; set; }
 
         /// <summary>
         /// Необходимые детали и расходники (int - id, string - название, decimal, потому что может быть не целое (например, 0.8 л масла))

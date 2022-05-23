@@ -13,14 +13,16 @@ namespace STODatabaseImplement.Models
     {
         public int Id { get; set; }
         public int TimeOfWorkId { get; set; }
-        public int? StoreKeeperId { get; set; }
+        public int StoreKeeperId { get; set; }
         [Required]
         public string WorkName { get; set; }
+        [Required]
+        public decimal Price { get; set; }
         [Required]
         public decimal NetPrice { get; set; }
         
         [Required]
-        public WorkStatus Status { get; set; }
+        public WorkStatus WorkStatus { get; set; }
         /// <summary>
         /// Внешний ключ (связь один ко многим)
         /// </summary>

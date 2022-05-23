@@ -22,7 +22,6 @@ namespace STODatabaseImplement
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TO>().Property(m => m.EmployeeId).IsRequired(false);
-            modelBuilder.Entity<Work>().Property(p => p.StoreKeeperId).IsRequired(false);
             base.OnModelCreating(modelBuilder);
         }
 

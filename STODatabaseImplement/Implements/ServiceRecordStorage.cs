@@ -51,7 +51,7 @@ namespace STODatabaseImplement.Implements
             using var context = new STODatabase();
             return context.ServiceRecords
                 .Include(rec => rec.Car)
-                .Where(rec => rec.Id.Equals(model.Id))
+                .Where(rec => rec.Id.Equals(model.Id) || rec.CarId == model.CarId)
                 .Select(CreateModel)
                 .ToList();
         }
@@ -87,8 +87,9 @@ namespace STODatabaseImplement.Implements
 
         private static ServiceRecord CreateModel(ServiceRecordBindingModel model, ServiceRecord serviceRecord)
         {
-            serviceRecord.Date = DateTime.Now;
+            serviceRecord.DateBegin = DateTime.Now;
             serviceRecord.Description = model.Description;
+            serviceRecord.DateEnd = model.DateEnd;
             return serviceRecord;
         }
 
@@ -97,7 +98,8 @@ namespace STODatabaseImplement.Implements
             return new ServiceRecordViewModel
             {
                 Id = serviceRecord.Id,
-                Date = serviceRecord.Date,
+                DateBegin = serviceRecord.DateBegin,
+                DateEnd = serviceRecord.DateEnd,
                 Description = serviceRecord.Description
             };
         }

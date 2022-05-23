@@ -13,10 +13,13 @@ namespace STOContracts.ViewModels
 
         [DisplayName("Наименование работы")]
         public string WorkName { get; set; }
-        public int? StoreKeeperId { get; set; }
+        public int StoreKeeperId { get; set; }
         public string StoreKeeperFIO { get; set; }
         public int TimeOfWorkId { get; set; }
+        [DisplayName("Продолжительность")]
         public int Hours { get; set; }
+        [DisplayName("Статус")]
+        public string WorkStatus { get; set; }
         /// <summary>
         /// Стоимость услуги
         /// </summary>

@@ -42,6 +42,7 @@ namespace STODatabaseImplement.Implements
             .ThenInclude(rec => rec.SparePart)
             .Include(rec => rec.TOWorks)
             .ThenInclude(rec => rec.TO)
+            .Include(rec => rec.StoreKeeper)
             .FirstOrDefault(rec => rec.WorkName == model.WorkName ||
             rec.Id == model.Id);
             return work != null ? CreateModel(work) : null;
@@ -60,7 +61,8 @@ namespace STODatabaseImplement.Implements
             .ThenInclude(rec => rec.SparePart)
             .Include(rec => rec.TOWorks)
             .ThenInclude(rec => rec.TO)
-            .Where(rec => rec.WorkName.Contains(model.WorkName))
+            .Include(rec => rec.StoreKeeper)
+            .Where(rec => rec.WorkName.Contains(model.WorkName) || rec.StoreKeeperId == model.StoreKeeperId)
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -75,6 +77,7 @@ namespace STODatabaseImplement.Implements
             .ThenInclude(rec => rec.SparePart)
             .Include(rec => rec.TOWorks)
             .ThenInclude(rec => rec.TO)
+            .Include(rec => rec.StoreKeeper)
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -86,13 +89,14 @@ namespace STODatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                //Сначала надо создать значение в таблице Work,
-                //а уже потом добавлять внешние ключи в таблицу WorkTimeOfWork, WorkSparePart, TOWork
                 Work work = new Work()
                 {
                     WorkName = model.WorkName,
                     NetPrice = model.NetPrice,
-                    TimeOfWorkId = model.TimeOfWorkId
+                    TimeOfWorkId = model.TimeOfWorkId,
+                    Price = model.Price,
+                    StoreKeeperId = model.StoreKeeperId.Value,
+                    WorkStatus = model.WorkStatus
                 };
                 context.Works.Add(work);
                 context.SaveChanges();
@@ -132,9 +136,6 @@ namespace STODatabaseImplement.Implements
         private static Work CreateModel(WorkBindingModel model, Work work,
             STODatabase context)
         {
-            work.WorkName = model.WorkName;
-            work.NetPrice = model.NetPrice;
-            work.TimeOfWorkId = model.TimeOfWorkId;
             if (model.Id.HasValue)
             {
                 var workSpareParts = context.WorkSpareParts
@@ -143,21 +144,18 @@ namespace STODatabaseImplement.Implements
 
                 context.WorkSpareParts
                     .RemoveRange(workSpareParts
-                    .Where(rec => !model.WorkSpareParts
-                    .ContainsKey(rec.SparePartId))
+                    .Where(rec => !model.WorkSpareParts.ContainsKey(rec.SparePartId))
                     .ToList());
                 context.SaveChanges();
 
                 foreach (var update in workSpareParts)
                 {
-                    update.Count =
-                        model.WorkSpareParts[update.WorkId].Item2;
+                    update.Count = model.WorkSpareParts[update.WorkId].Item2;
                     model.WorkSpareParts.Remove(update.WorkId);
                 }
                 context.SaveChanges();
             }
-
-            foreach(var uwsp in model.WorkSpareParts)
+            foreach (var uwsp in model.WorkSpareParts)
             {
                 context.WorkSpareParts.Add(new WorkSparePart
                 {
@@ -178,6 +176,11 @@ namespace STODatabaseImplement.Implements
                 WorkName = work.WorkName,
                 NetPrice = work.NetPrice,
                 TimeOfWorkId = work.TimeOfWorkId,
+                Price = work.Price,
+                StoreKeeperId = work.StoreKeeperId,
+                StoreKeeperFIO = work.StoreKeeper.FIO,
+                Hours = work.TimeOfWork.Hours,
+                WorkStatus = work.WorkStatus.ToString(),
                 WorkSpareParts = work.WorkSpareParts
                 .ToDictionary(recPC => recPC.WorkId,
                 recPC => (recPC.SparePart?.SparePartName, recPC.Count))

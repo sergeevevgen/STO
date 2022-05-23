@@ -14,6 +14,6 @@ namespace STOContracts.BindingModels
 
         public string Login { get; set; }
 
-        public int Password { get; set; }
+        public string Password { get; set; }
     }
 }
