@@ -19,6 +19,12 @@ namespace STODatabaseImplement
             }
             base.OnConfiguring(optionsBuilder);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TO>().Property(m => m.EmployeeId).IsRequired(false);
+            modelBuilder.Entity<Work>().Property(p => p.StoreKeeperId).IsRequired(false);
+            base.OnModelCreating(modelBuilder);
+        }
 
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<StoreKeeper> StoreKeepers { get; set; }
@@ -28,7 +34,6 @@ namespace STODatabaseImplement
         public virtual DbSet<SparePart> SpareParts { get; set; }
         public virtual DbSet<TimeOfWork> TimeOfWorks  { get; set; }
         public virtual DbSet<TO> TOs { get; set; }
-        public virtual DbSet<TOCar> TOCars { get; set; }
         public virtual DbSet<TOWork> TOWorks  { get; set; }
         public virtual DbSet<Work> Works { get; set; }
         public virtual DbSet<WorkSparePart> WorkSpareParts { get; set; }
