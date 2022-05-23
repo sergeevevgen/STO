@@ -10,4 +10,8 @@
     <ProjectReference Include="..\STOContracts\STOContracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="OfficePackage\Implements\" />
+  </ItemGroup>
+
 </Project>
