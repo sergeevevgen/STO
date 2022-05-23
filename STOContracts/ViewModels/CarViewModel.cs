@@ -37,5 +37,10 @@ namespace STOContracts.ViewModels
         /// </summary>
         [DisplayName("Телефон владельца")]
         public string OwnerPhoneNumber { get; set; }
+
+        /// <summary>
+        /// Записи сервисов
+        /// </summary>
+        public Dictionary<int, (DateTime, string)> CarRecords { get; set; }
     }
 }

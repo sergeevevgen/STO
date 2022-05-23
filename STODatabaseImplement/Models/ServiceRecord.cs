@@ -10,10 +10,11 @@ namespace STODatabaseImplement.Models
     public class ServiceRecord
     {
         public int Id { get; set; }
-        
         public int CarId { get; set; }
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime DateBegin { get; set; }
+        public DateTime? DateEnd { get; set; }
+        [Required]
         public string Description { get; set; }
         public virtual Car Car { get; set; }
     }

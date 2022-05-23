@@ -16,10 +16,14 @@ namespace STOContracts.BindingModels
         /// Время выполнения работы
         /// </summary>
         public int TimeOfWorkId { get; set; }
+        /// <summary>
+        /// Стоимость услуги
+        /// </summary>
+        public decimal Price { get; set; }
         public decimal NetPrice { get; set; }
 
         /// <summary>
-        /// Необходимые детали и расходники (int - id, string - название, int - кол-во)
+        /// Необходимые детали и расходники (int - id, string - название, decimal, потому что может быть не целое (например, 0.8 л масла))
         /// </summary>
         public Dictionary<int, (string, decimal)> WorkSpareParts { get; set; }
     }

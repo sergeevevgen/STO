@@ -23,7 +23,7 @@ namespace STOContracts.BindingModels
         /// <summary>
         /// Работы ТО
         /// </summary>
-        public Dictionary<int, (string, decimal)> TOWorks { get; set; }
+        public Dictionary<int, (string, int)> TOWorks { get; set; }
         public decimal Sum { get; set; }
         public TOStatus Status { get; set; }
         public DateTime DateCreate { get; set; }

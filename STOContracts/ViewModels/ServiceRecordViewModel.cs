@@ -13,8 +13,10 @@ namespace STOContracts.ViewModels
     public class ServiceRecordViewModel
     {
         public int Id { get; set; }
-        [DisplayName("Дата записи")]
-        public DateTime Date { get; set; }
+        [DisplayName("Дата начала")]
+        public DateTime DateBegin { get; set; }
+        [DisplayName("Дата окончания")]
+        public DateTime? DateEnd { get; set; }
         [DisplayName("Запись")]
         public string Description { get; set; }
     }

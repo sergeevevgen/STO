@@ -9,9 +9,12 @@ namespace STOContracts.ViewModels
 {
     public class TOViewModel
     { 
-        public int? Id { get; set; }
+        public int Id { get; set; }
         public int CarId { get; set; }
-        public Dictionary<int, (string, decimal)> TOWorks { get; set; }
+        public int? EmployeeId { get; set; }
+        [DisplayName("Работник")]
+        public string EmployeeFIO { get; set; }
+        public Dictionary<int, (string, int)> TOWorks { get; set; }
 
         [DisplayName("Сумма")]
         public decimal Sum { get; set; }

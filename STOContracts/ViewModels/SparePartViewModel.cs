@@ -9,7 +9,7 @@ namespace STOContracts.ViewModels
 {
     public class SparePartViewModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         [DisplayName("Запчасть")]
         public string SparePartName { get; set; }
@@ -26,6 +26,9 @@ namespace STOContracts.ViewModels
         [DisplayName("Единица измерения")]
         public string UMeasurement { get; set; }
 
-        public Dictionary<int, string> Cars { get; set; }
+        /// <summary>
+        /// Марка и модель
+        /// </summary>
+        public Dictionary<int, (string, string)> Cars { get; set; }
     }
 }

@@ -10,12 +10,15 @@ namespace STODatabaseImplement.Models
 {
     public class StoreKeeper
     {
-        public int? Id { get; set; }
-
+        public int Id { get; set; }
+        [Required]
         public string FIO { get; set; }
+        [Required]
+        public string Login { get; set; }
+        [Required]
+        public string Password { get; set; }
 
-        public string login { get; set; }
-
-        public int password { get; set; }
+        [ForeignKey("StoreKeeperId")]
+        public virtual List<Work> Works { get; set; }
     }
 }

@@ -10,13 +10,20 @@ namespace STODatabaseImplement.Models
 {
     public class Employee
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
+        [Required]
         public string FIO { get; set; }
 
-        public string login { get; set; }
+        [Required]
+        public string Login { get; set; }
 
-        public int password { get; set; }
-
+        [Required]
+        public string Password { get; set; }
+        /// <summary>
+        /// Внешний ключ (связь один ко многим)
+        /// </summary>
+        [ForeignKey("EmployeeId")]
+        public virtual List<TO> TOs { get; set; }
     }
 }
