@@ -8,9 +8,11 @@ namespace STOContracts.BindingModels
 {
     public class CreateWorkBindingModel
     {
-        public int WorkId { get; set; }
+        public int WorkTypeId { get; set; }
+        public string WorkName { get; set; }
         public int StoreKeeperId { get; set; }
         public int Count { get; set; }
-        public decimal Sum  { get; set; }
+        public decimal Price  { get; set; }
+        public decimal NetPrice { get; set; }
     }
 }

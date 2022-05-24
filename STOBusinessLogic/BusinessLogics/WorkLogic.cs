@@ -7,6 +7,7 @@ using STOContracts.BindingModels;
 using STOContracts.BusinessLogicsContracts;
 using STOContracts.StorageContracts;
 using STOContracts.ViewModels;
+using STOContracts.Enums;
 
 namespace STOBusinessLogic.BusinessLogics
 {
@@ -46,7 +47,16 @@ namespace STOBusinessLogic.BusinessLogics
 
         public void CreateWork(CreateWorkBindingModel model)
         {
-            throw new NotImplementedException();
+            _workStorage.Insert(new WorkBindingModel
+            {
+                WorkName = model.WorkName,
+                WorkTypeId = model.WorkTypeId,
+                Price = model.Price,
+                NetPrice = model.NetPrice,
+                StoreKeeperId = model.StoreKeeperId,
+                WorkStatus = WorkStatus.Принят,
+                WorkSpareParts = _workTypeStorage.GetElement(new WorkTypeBindingModel { Id = model.WorkTypeId }).WorkSpareParts
+            });
         }
 
         public void Delete(WorkTypeBindingModel model)
@@ -65,7 +75,26 @@ namespace STOBusinessLogic.BusinessLogics
 
         public void FinishWork(ChangeWorkStatusBindingModel model)
         {
-            throw new NotImplementedException();
+            var work = _workStorage.GetElement(new WorkBindingModel { Id = model.WorkId });
+            if (work == null)
+            {
+                throw new Exception("Работа не найдена");
+            }
+            if (work.WorkStatus != Enum.GetName(typeof(WorkStatus), 2))
+            {
+                throw new Exception("Работа не в статусе \"Выполняется\"");
+            }
+            _workStorage.Update(new WorkBindingModel
+            {
+                Id = work.Id,
+                StoreKeeperId = work.StoreKeeperId,
+                WorkStatus = WorkStatus.Готов,
+                WorkName = work.WorkName,
+                Price = work.Price,
+                NetPrice = work.NetPrice,
+                WorkTypeId = work.WorkTypeId,
+                WorkSpareParts = work.WorkSpareParts
+            });
         }
 
         public List<WorkViewModel> Read(WorkBindingModel model)
@@ -85,7 +114,26 @@ namespace STOBusinessLogic.BusinessLogics
 
         public void TakeWorkInWork(ChangeWorkStatusBindingModel model)
         {
-            throw new NotImplementedException();
+            var work = _workStorage.GetElement(new WorkBindingModel { Id = model.WorkId });
+            if (work == null)
+            {
+                throw new Exception("Работа не найдена");
+            }
+            if (work.WorkStatus != Enum.GetName(typeof(WorkStatus), 0))
+            {
+                throw new Exception("Работа не в статусе \"Принят\"");
+            }
+            _workStorage.Update(new WorkBindingModel
+            {
+                Id = work.Id,
+                StoreKeeperId = work.StoreKeeperId,
+                WorkStatus = WorkStatus.Выполняется,
+                WorkName = work.WorkName,
+                Price = work.Price,
+                NetPrice = work.NetPrice,
+                WorkTypeId = work.WorkTypeId,
+                WorkSpareParts = work.WorkSpareParts
+            });
         }
     }
 }

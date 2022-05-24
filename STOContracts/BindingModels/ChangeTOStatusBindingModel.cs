@@ -12,5 +12,6 @@ namespace STOContracts.BindingModels
     public class ChangeTOStatusBindingModel
     {
         public int TOId { get; set; }
+        public int? EmployeeId { get; set; }
     }
 }

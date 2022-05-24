@@ -35,7 +35,6 @@ namespace STOBusinessLogic.BusinessLogics
             {
                 Id = tO.Id,
                 CarId = tO.CarId,
-                EmployeeId = tO.EmployeeId,
                 TOWorks = tO.TOWorks,
                 Sum = tO.Sum,
                 Status = TOStatus.Выдан_клиенту,
@@ -113,7 +112,7 @@ namespace STOBusinessLogic.BusinessLogics
             _tOStorage.Update(new TOBindingModel
             {
                 Id = tO.Id,
-                EmployeeId = tO.EmployeeId,
+                EmployeeId = model.EmployeeId,
                 CarId = tO.CarId,
                 TOWorks = tO.TOWorks,
                 Sum = tO.Sum,
