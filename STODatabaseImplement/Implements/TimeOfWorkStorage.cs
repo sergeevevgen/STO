@@ -40,7 +40,7 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             var timeOfWork = context.TimeOfWorks
-                .Include(rec => rec.Works)
+                .Include(rec => rec.WorkTypes)
                 .FirstOrDefault(rec => rec.Id == model.Id || rec.Hours == model.Hours);
             return timeOfWork != null ? CreateModel(timeOfWork) : null;
         }
@@ -53,7 +53,7 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             return context.TimeOfWorks
-                .Include(rec => rec.Works)
+                .Include(rec => rec.WorkTypes)
                 .Where(rec => rec.Hours == model.Hours)
                 .ToList()
                 .Select(CreateModel)
@@ -75,11 +75,11 @@ namespace STODatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                context.TimeOfWorks.Add(CreateModel(model, new TimeOfWork(), context));
+                context.TimeOfWorks.Add(CreateModel(model, new TimeOfWork()));
                 context.SaveChanges();
                 transaction.Commit();
             }
-            catch (Exception ex)
+            catch
             {
                 transaction.Rollback();
                 throw;
@@ -98,18 +98,18 @@ namespace STODatabaseImplement.Implements
                 {
                     throw new Exception("Элемент не найден");
                 }
-                CreateModel(model, element, context);
+                CreateModel(model, element);
                 context.SaveChanges();
                 transaction.Commit();
             }
-            catch(Exception ex)
+            catch
             {
                 transaction.Rollback();
                 throw;
             }                      
         }
 
-        private static TimeOfWork CreateModel(TimeOfWorkBindingModel model, TimeOfWork timeOfWork, STODatabase context)
+        private static TimeOfWork CreateModel(TimeOfWorkBindingModel model, TimeOfWork timeOfWork)
         {
             timeOfWork.Hours = model.Hours;
             return timeOfWork;

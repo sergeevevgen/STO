@@ -8,7 +8,7 @@ using STOContracts.BindingModels;
 
 namespace STOContracts.BusinessLogicsContracts
 {
-    public interface IStoreKeeperBindingModel
+    public interface IStoreKeeperLogic
     {
         List<StoreKeeperViewModel> Read(StoreKeeperBindingModel model);
 

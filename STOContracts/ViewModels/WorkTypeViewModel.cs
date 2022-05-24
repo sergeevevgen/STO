@@ -3,23 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using STOContracts.Enums;
 
-namespace STOContracts.BindingModels
+namespace STOContracts.ViewModels
 {
-    public class WorkBindingModel
+    public class WorkTypeViewModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
         public string WorkName { get; set; }
-        public int? StoreKeeperId { get; set; }
-        public int? WorkTypeId { get; set; }
 
         /// <summary>
-        /// Стоимость услуги
+        /// Время выполнения работы
         /// </summary>
-        public decimal Price { get; set; }
-        public decimal NetPrice { get; set; }
-        public WorkStatus WorkStatus { get; set; }
+        public int TimeOfWorkId { get; set; }
+        public int Hours { get; set; }
 
         /// <summary>
         /// Необходимые детали и расходники (int - id, string - название, decimal, потому что может быть не целое (например, 0.8 л масла))

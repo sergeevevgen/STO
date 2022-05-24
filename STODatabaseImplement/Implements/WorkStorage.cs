@@ -40,14 +40,12 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             var work = context.Works
-            .Include(rec => rec.TimeOfWork)
-            .Include(rec => rec.WorkSpareParts)
-            .ThenInclude(rec => rec.SparePart)
-            .Include(rec => rec.TOWorks)
-            .ThenInclude(rec => rec.TO)
-            .Include(rec => rec.StoreKeeper)
-            .FirstOrDefault(rec => rec.WorkName == model.WorkName ||
-            rec.Id == model.Id);
+                .Include(rec => rec.WorkType)
+                .Include(rec => rec.TOWorks)
+                .ThenInclude(rec => rec.TO)
+                .Include(rec => rec.StoreKeeper)
+                .FirstOrDefault(rec => rec.WorkName == model.WorkName ||
+                rec.Id == model.Id);
             return work != null ? CreateModel(work) : null;
         }
 
@@ -59,31 +57,27 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             return context.Works
-            .Include(rec => rec.TimeOfWork)
-            .Include(rec => rec.WorkSpareParts)
-            .ThenInclude(rec => rec.SparePart)
-            .Include(rec => rec.TOWorks)
-            .ThenInclude(rec => rec.TO)
-            .Include(rec => rec.StoreKeeper)
-            .Where(rec => rec.WorkName.Contains(model.WorkName) || rec.StoreKeeperId == model.StoreKeeperId)
-            .ToList()
-            .Select(CreateModel)
-            .ToList();
+                .Include(rec => rec.WorkType)
+                .Include(rec => rec.TOWorks)
+                .ThenInclude(rec => rec.TO)
+                .Include(rec => rec.StoreKeeper)
+                .Where(rec => rec.WorkName.Contains(model.WorkName) || rec.StoreKeeperId == model.StoreKeeperId)
+                .ToList()
+                .Select(CreateModel)
+                .ToList();
         }
 
         public List<WorkViewModel> GetFullList()
         {
             using var context = new STODatabase();
             return context.Works
-            .Include(rec => rec.TimeOfWork)
-            .Include(rec => rec.WorkSpareParts)
-            .ThenInclude(rec => rec.SparePart)
-            .Include(rec => rec.TOWorks)
-            .ThenInclude(rec => rec.TO)
-            .Include(rec => rec.StoreKeeper)
-            .ToList()
-            .Select(CreateModel)
-            .ToList();
+                .Include(rec => rec.WorkType)
+                .Include(rec => rec.TOWorks)
+                .ThenInclude(rec => rec.TO)
+                .Include(rec => rec.StoreKeeper)
+                .ToList()
+                .Select(CreateModel)
+                .ToList();
         }
 
         public void Insert(WorkBindingModel model)
@@ -92,18 +86,8 @@ namespace STODatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                Work work = new Work()
-                {
-                    WorkName = model.WorkName,
-                    NetPrice = model.NetPrice,
-                    TimeOfWorkId = model.TimeOfWorkId,
-                    Price = model.Price,
-                    StoreKeeperId = model.StoreKeeperId.Value,
-                    WorkStatus = model.WorkStatus
-                };
-                context.Works.Add(work);
+                context.Works.Add(CreateModel(model, new Work()));
                 context.SaveChanges();
-                CreateModel(model, work, context);
                 transaction.Commit();
             }
             catch
@@ -125,7 +109,7 @@ namespace STODatabaseImplement.Implements
                 {
                     throw new Exception("Элемент не найден");
                 }
-                CreateModel(model, element, context);
+                CreateModel(model, element);
                 context.SaveChanges();
                 transaction.Commit();
             }
@@ -136,45 +120,14 @@ namespace STODatabaseImplement.Implements
             }
         }
 
-        private static Work CreateModel(WorkBindingModel model, Work work,
-            STODatabase context)
+        private static Work CreateModel(WorkBindingModel model, Work work)
         {
             work.WorkName = model.WorkName;
             work.NetPrice = model.NetPrice;
-            work.TimeOfWorkId = model.TimeOfWorkId;
+            work.WorkTypeId = model.WorkTypeId.Value;
             work.Price = model.Price;
             work.StoreKeeperId = model.StoreKeeperId.Value;
             work.WorkStatus = model.WorkStatus;
-
-            if (model.Id.HasValue)
-            {
-                var workSpareParts = context.WorkSpareParts
-                    .Where(rec => rec.WorkId == model.Id.Value)
-                    .ToList();
-
-                context.WorkSpareParts
-                    .RemoveRange(workSpareParts
-                    .Where(rec => !model.WorkSpareParts.ContainsKey(rec.SparePartId))
-                    .ToList());
-                context.SaveChanges();
-
-                foreach (var update in workSpareParts)
-                {
-                    update.Count = model.WorkSpareParts[update.WorkId].Item2;
-                    model.WorkSpareParts.Remove(update.WorkId);
-                }
-                context.SaveChanges();
-            }
-            foreach (var uwsp in model.WorkSpareParts)
-            {
-                context.WorkSpareParts.Add(new WorkSparePart
-                {
-                    WorkId = work.Id,
-                    SparePartId = uwsp.Key,
-                    Count = uwsp.Value.Item2
-                });
-                context.SaveChanges();
-            }
             return work;
         }
 
@@ -185,14 +138,14 @@ namespace STODatabaseImplement.Implements
                 Id = work.Id,
                 WorkName = work.WorkName,
                 NetPrice = work.NetPrice,
-                TimeOfWorkId = work.TimeOfWorkId,
+                WorkTypeId = work.WorkTypeId,
                 Price = work.Price,
                 StoreKeeperId = work.StoreKeeperId,
                 StoreKeeperFIO = work.StoreKeeper.FIO,
-                Hours = work.TimeOfWork.Hours,
+                Hours = work.WorkType.TimeOfWork.Hours,
                 WorkStatus = work.WorkStatus.ToString(),
-                WorkSpareParts = work.WorkSpareParts
-                .ToDictionary(recPC => recPC.WorkId,
+                WorkSpareParts = work.WorkType.WorkSpareParts
+                .ToDictionary(recPC => recPC.WorkTypeId,
                 recPC => (recPC.SparePart?.SparePartName, recPC.Count))
             };
         }

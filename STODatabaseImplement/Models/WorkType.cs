@@ -8,16 +8,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace STODatabaseImplement.Models
 {
-    public class TimeOfWork
+    public class WorkType
     {
         public int Id { get; set; }
         [Required]
-        public int Hours { get; set; }
-        
-        /// <summary>
-        /// Внешний ключ (связь один ко многим)
-        /// </summary>
-        [ForeignKey("TimeOfWorkId")]
-        public virtual List<WorkType> WorkTypes { get; set; }
+
+        public string WorkName { get; set; }
+
+        public int TimeOfWorkId { get; set; }
+
+        [ForeignKey("WorkTypeId")]
+        public virtual List<WorkSparePart> WorkSpareParts { get; set; }
+        public virtual TimeOfWork TimeOfWork { get; set; }
     }
 }

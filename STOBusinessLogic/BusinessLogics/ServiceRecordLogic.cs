@@ -23,7 +23,6 @@ namespace STOBusinessLogic.BusinessLogics
         {
             var element = _serviceRecordStorage.GetElement(new ServiceRecordBindingModel
             {
-                Date = model.Date,
                 Description = model.Description
             });
             if (element != null && element.Id != model.Id)

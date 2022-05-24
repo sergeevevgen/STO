@@ -15,7 +15,7 @@ namespace STOContracts.ViewModels
         public string WorkName { get; set; }
         public int StoreKeeperId { get; set; }
         public string StoreKeeperFIO { get; set; }
-        public int TimeOfWorkId { get; set; }
+        public int WorkTypeId { get; set; }
         [DisplayName("Продолжительность")]
         public int Hours { get; set; }
         [DisplayName("Статус")]

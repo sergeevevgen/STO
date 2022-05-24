@@ -23,12 +23,7 @@ namespace STOBusinessLogic.BusinessLogics
         {
             var element = _sparePartStorage.GetElement(new SparePartBindingModel
             {
-                SparePartName = model.SparePartName,
-                FactoryNumber = model.FactoryNumber,
-                Price = model.Price,
-                Status = model.Status,
-                UMeasurement = model.UMeasurement,
-                Cars = model.Cars
+                FactoryNumber = model.FactoryNumber
             });
             if (element != null && element.Id != model.Id)
             {
@@ -51,6 +46,7 @@ namespace STOBusinessLogic.BusinessLogics
             {
                 Id = model.Id
             });
+
             if (element == null)
             {
                 throw new Exception("Элемент не найден");

@@ -41,7 +41,7 @@ namespace STODatabaseImplement.Implements
             using var context = new STODatabase();
             var serviceRecord = context.ServiceRecords
             .Include(rec => rec.Car)
-            .FirstOrDefault(rec => rec.Id == model.Id);
+            .FirstOrDefault(rec => rec.Description.Contains(model.Description) || rec.Id == model.Id);
             return serviceRecord != null ? CreateModel(serviceRecord) : null;
         }
 

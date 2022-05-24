@@ -23,11 +23,7 @@ namespace STOBusinessLogic.BusinessLogics
         {
             var element = _carStorage.GetElement(new CarBindingModel
             {
-                CarBrand = model.CarBrand,
-                CarModel = model.CarModel,
-                VIN = model.VIN,
-                OwnerPhoneNumber = model.OwnerPhoneNumber,
-                CarRecords = model.CarRecords
+                VIN = model.VIN
             });
             if (element != null && element.Id != model.Id)
             {

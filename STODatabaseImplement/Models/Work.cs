@@ -12,8 +12,8 @@ namespace STODatabaseImplement.Models
     public class Work
     {
         public int Id { get; set; }
-        public int TimeOfWorkId { get; set; }
         public int StoreKeeperId { get; set; }
+        public int WorkTypeId { get; set; }
         [Required]
         public string WorkName { get; set; }
         [Required]
@@ -23,18 +23,13 @@ namespace STODatabaseImplement.Models
         
         [Required]
         public WorkStatus WorkStatus { get; set; }
-        /// <summary>
-        /// Внешний ключ (связь один ко многим)
-        /// </summary>
-        [ForeignKey("WorkId")]
-        public virtual List<WorkSparePart> WorkSpareParts { get; set; }
 
         /// <summary>
         /// Внешний ключ (связь один ко многим)
         /// </summary>
         [ForeignKey("WorkId")]
         public virtual List<TOWork> TOWorks { get; set; }
-        public virtual TimeOfWork TimeOfWork { get; set; }
         public virtual StoreKeeper StoreKeeper { get; set; }
+        public virtual WorkType WorkType { get; set; }
     }
 }
