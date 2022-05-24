@@ -11,6 +11,9 @@ using STODatabaseImplement.Models;
 
 namespace STODatabaseImplement.Implements
 {
+    /// <summary>
+    /// Сделано
+    /// </summary>
     public class EmployeeStorage : IEmployeeStorage
     {
         public void Delete(EmployeeBindingModel model)

@@ -11,6 +11,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace STODatabaseImplement.Implements
 {
+    /// <summary>
+    /// Сделано
+    /// </summary>
     public class WorkStorage : IWorkStorage
     {
         public void Delete(WorkBindingModel model)
@@ -136,6 +139,13 @@ namespace STODatabaseImplement.Implements
         private static Work CreateModel(WorkBindingModel model, Work work,
             STODatabase context)
         {
+            work.WorkName = model.WorkName;
+            work.NetPrice = model.NetPrice;
+            work.TimeOfWorkId = model.TimeOfWorkId;
+            work.Price = model.Price;
+            work.StoreKeeperId = model.StoreKeeperId.Value;
+            work.WorkStatus = model.WorkStatus;
+
             if (model.Id.HasValue)
             {
                 var workSpareParts = context.WorkSpareParts

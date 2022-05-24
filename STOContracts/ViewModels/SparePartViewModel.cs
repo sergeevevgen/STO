@@ -15,7 +15,7 @@ namespace STOContracts.ViewModels
         public string SparePartName { get; set; }
 
         [DisplayName("Заводской номер")]
-        public int FactoryNumber { get; set; }
+        public string FactoryNumber { get; set; }
 
         [DisplayName("Стоимость")]
         public decimal Price { get; set; }

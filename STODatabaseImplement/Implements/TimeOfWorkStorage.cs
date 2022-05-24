@@ -11,6 +11,9 @@ using STODatabaseImplement.Models;
 
 namespace STODatabaseImplement.Implements
 {
+    /// <summary>
+    /// Сделано
+    /// </summary>
     public class TimeOfWorkStorage : ITimeOfWorkStorage
     {
         public void Delete(TimeOfWorkBindingModel model)

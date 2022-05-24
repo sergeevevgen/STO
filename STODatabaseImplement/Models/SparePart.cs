@@ -15,7 +15,7 @@ namespace STODatabaseImplement.Models
         [Required]
         public string SparePartName { get; set; }
         [Required]
-        public int FactoryNumber { get; set; }
+        public string FactoryNumber { get; set; }
         [Required]
         public decimal Price { get; set; }
         [Required]

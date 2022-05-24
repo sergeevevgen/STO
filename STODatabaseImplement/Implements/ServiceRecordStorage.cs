@@ -11,6 +11,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace STODatabaseImplement.Implements
 {
+    /// <summary>
+    /// Сделано
+    /// </summary>
     public class ServiceRecordStorage : IServiceRecordStorage
     {
         public void Delete(ServiceRecordBindingModel model)
@@ -52,6 +55,7 @@ namespace STODatabaseImplement.Implements
             return context.ServiceRecords
                 .Include(rec => rec.Car)
                 .Where(rec => rec.Id.Equals(model.Id) || rec.CarId == model.CarId)
+                .ToList()
                 .Select(CreateModel)
                 .ToList();
         }
@@ -61,6 +65,7 @@ namespace STODatabaseImplement.Implements
             using var context = new STODatabase();
             return context.ServiceRecords
                 .Include(rec => rec.Car)
+                .ToList()
                 .Select(CreateModel)
                 .ToList();
         }
@@ -87,7 +92,7 @@ namespace STODatabaseImplement.Implements
 
         private static ServiceRecord CreateModel(ServiceRecordBindingModel model, ServiceRecord serviceRecord)
         {
-            serviceRecord.DateBegin = DateTime.Now;
+            serviceRecord.DateBegin = model.DateBegin;
             serviceRecord.Description = model.Description;
             serviceRecord.DateEnd = model.DateEnd;
             return serviceRecord;

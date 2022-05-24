@@ -12,7 +12,7 @@ namespace STOContracts.BindingModels
         public int? Id { get; set; }
         public string SparePartName { get; set; }
 
-        public int FactoryNumber { get; set; }
+        public string FactoryNumber { get; set; }
 
         public decimal Price { get; set; }
 
@@ -23,6 +23,6 @@ namespace STOContracts.BindingModels
         /// <summary>
         /// Словарь подходящих моделей машин
         /// </summary>
-        public Dictionary<int, (string, string)>  Cars{ get; set; }
+        public Dictionary<int, (string, string)>  Cars { get; set; }
     }
 }

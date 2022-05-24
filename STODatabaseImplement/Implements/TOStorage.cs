@@ -16,8 +16,8 @@ namespace STODatabaseImplement.Implements
         public void Delete(TOBindingModel model)
         {
             using var context = new STODatabase();
-            TO element = context.TOs.FirstOrDefault(rec => rec.Id ==
-            model.Id);
+            TO element = context.TOs
+                .FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
                 context.TOs.Remove(element);
@@ -37,8 +37,6 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             var to = context.TOs
-            .Include(rec => rec.TOCars)
-            .ThenInclude(rec => rec.Car)
             .Include(rec => rec.TOWorks)
             .ThenInclude(rec => rec.Work)
             .FirstOrDefault(rec => rec.Id == model.Id);
@@ -53,11 +51,9 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             return context.TOs
-            .Include(rec => rec.TOCars)
-            .ThenInclude(rec => rec.Car)
             .Include(rec => rec.TOWorks)
             .ThenInclude(rec => rec.Work)
-            .Where(rec => rec.Id.Equals(model.Id))
+            .Where(rec => rec.Id.Equals(model.Id) || rec.Status == model.Status || (rec.DateCreate.Date >= model.DateCreate.Date && rec.DateCreate.Date <= model.DateOver.Value.Date))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -67,8 +63,6 @@ namespace STODatabaseImplement.Implements
         {
             using var context = new STODatabase();
             return context.TOs
-            .Include(rec => rec.TOCars)
-            .ThenInclude(rec => rec.Car)
             .Include(rec => rec.TOWorks)
             .ThenInclude(rec => rec.Work)
             .ToList()
@@ -130,6 +124,8 @@ namespace STODatabaseImplement.Implements
         private static TO CreateModel(TOBindingModel model, TO tO, STODatabase context)
         {
             tO.Sum = model.Sum;
+            tO.CarId = model.CarId;
+            tO.EmployeeId = model.EmployeeId;
             tO.Status = model.Status;
             tO.DateCreate = model.DateCreate;
             tO.DateImplement = model.DateImplement;
@@ -174,12 +170,17 @@ namespace STODatabaseImplement.Implements
             return new TOViewModel
             {
                 Id = to.Id,
+                EmployeeId = to.EmployeeId,
+                EmployeeFIO = to.EmployeeId.HasValue ? to.Employee.FIO : string.Empty,
+                
                 Sum = to.Sum,
                 Status = to.Status.ToString(),
                 DateCreate = to.DateCreate,
+                DateImplement = to.DateImplement,
+                DateOver = to.DateOver,
                 TOWorks = to.TOWorks
                 .ToDictionary(recPC => recPC.TOId,
-                recPC => (recPC.TO?.Status.ToString(), recPC.Count))
+                recPC => (recPC.Work?.WorkName, recPC.Count))
             };
         }
     }

@@ -11,13 +11,16 @@ using STODatabaseImplement.Models;
 
 namespace STODatabaseImplement.Implements
 {
+    /// <summary>
+    /// Сделано
+    /// </summary>
     public class CarStorage : ICarStorage
     {
         public void Delete(CarBindingModel model)
         {
             using var context = new STODatabase();
-            Car element = context.Cars.FirstOrDefault(rec => rec.Id ==
-            model.Id);
+            Car element = context.Cars
+                .FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
                 context.Cars.Remove(element);
@@ -46,7 +49,7 @@ namespace STODatabaseImplement.Implements
                 };
                 context.Cars.Add(car);
                 context.SaveChanges();
-                CreateModel(model, car, context);
+                CreateModel(model, car);
                 transaction.Commit();
             }
             catch
@@ -68,7 +71,7 @@ namespace STODatabaseImplement.Implements
                 {
                     throw new Exception("Элемент не найден");
                 }
-                CreateModel(model, element, context);
+                CreateModel(model, element);
                 context.SaveChanges();
                 transaction.Commit();
             }
@@ -83,11 +86,8 @@ namespace STODatabaseImplement.Implements
         {
             using var context = new STODatabase();
             return context.Cars
-            .Include(rec => rec.ServiceRecords)
             .Include(rec => rec.CarSpareParts)
             .ThenInclude(rec => rec.SparePart)
-            .Include(rec => rec.TOCars)
-            .ThenInclude(rec => rec.TO)
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -100,15 +100,12 @@ namespace STODatabaseImplement.Implements
                 return null;
             }
             using var context = new STODatabase();
-            var work = context.Cars
-            .Include(rec => rec.ServiceRecords)
+            var car = context.Cars
             .Include(rec => rec.CarSpareParts)
             .ThenInclude(rec => rec.SparePart)
-            .Include(rec => rec.TOCars)
-            .ThenInclude(rec => rec.TO)
-            .FirstOrDefault(rec => rec.CarModel == model.CarModel ||
+            .FirstOrDefault(rec => rec.VIN == model.VIN ||
             rec.Id == model.Id);
-            return work != null ? CreateModel(work) : null;
+            return car != null ? CreateModel(car) : null;
         }
 
         public List<CarViewModel> GetFilteredList(CarBindingModel model)
@@ -119,12 +116,9 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             return context.Cars
-            .Include(rec => rec.ServiceRecords)
             .Include(rec => rec.CarSpareParts)
             .ThenInclude(rec => rec.SparePart)
-            .Include(rec => rec.TOCars)
-            .ThenInclude(rec => rec.TO)
-            .Where(rec => rec.CarModel.Contains(model.CarModel))
+            .Where(rec => (rec.CarModel != string.Empty && rec.CarModel.Contains(model.CarModel)) || (rec.CarBrand != string.Empty && rec.CarBrand.Contains(model.CarBrand)))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -142,8 +136,7 @@ namespace STODatabaseImplement.Implements
             };
         }
 
-        private static Car CreateModel(CarBindingModel model, Car car,
-            STODatabase context)
+        private static Car CreateModel(CarBindingModel model, Car car)
         {
             car.CarBrand = model.CarBrand;
             car.CarModel = model.CarModel;
