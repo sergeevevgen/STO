@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using STOContracts.BindingModels;
 using STOContracts.StorageContracts;
 using STOContracts.ViewModels;
@@ -36,7 +37,8 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             var timeOfWork = context.TimeOfWorks
-                .FirstOrDefault(rec => rec.Id == model.Id);
+                .Include(rec => rec.Works)
+                .FirstOrDefault(rec => rec.Id == model.Id || rec.Hours == model.Hours);
             return timeOfWork != null ? CreateModel(timeOfWork) : null;
         }
 
@@ -48,7 +50,9 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             return context.TimeOfWorks
-                .Where(rec => rec.Id.Equals(model.Id))
+                .Include(rec => rec.Works)
+                .Where(rec => rec.Hours == model.Hours)
+                .ToList()
                 .Select(CreateModel)
                 .ToList();
         }
@@ -57,6 +61,7 @@ namespace STODatabaseImplement.Implements
         {
             using var context = new STODatabase();
             return context.TimeOfWorks
+                .ToList()
                 .Select(CreateModel)
                 .ToList();
         }
@@ -64,23 +69,44 @@ namespace STODatabaseImplement.Implements
         public void Insert(TimeOfWorkBindingModel model)
         {
             using var context = new STODatabase();
-            context.TimeOfWorks.Add(CreateModel(model, new TimeOfWork()));
-            context.SaveChanges();
+            using var transaction = context.Database.BeginTransaction();
+            try
+            {
+                context.TimeOfWorks.Add(CreateModel(model, new TimeOfWork(), context));
+                context.SaveChanges();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
         public void Update(TimeOfWorkBindingModel model)
         {
             using var context = new STODatabase();
-            var element = context.TimeOfWorks.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element == null)
+            using var transaction = context.Database.BeginTransaction();
+            try
             {
-                throw new Exception("Элемент не найден");
+                var element = context.TimeOfWorks
+                    .FirstOrDefault(rec => rec.Id == model.Id);
+                if (element == null)
+                {
+                    throw new Exception("Элемент не найден");
+                }
+                CreateModel(model, element, context);
+                context.SaveChanges();
+                transaction.Commit();
             }
-            CreateModel(model, element);
-            context.SaveChanges();
+            catch(Exception ex)
+            {
+                transaction.Rollback();
+                throw;
+            }                      
         }
 
-        private static TimeOfWork CreateModel(TimeOfWorkBindingModel model, TimeOfWork timeOfWork)
+        private static TimeOfWork CreateModel(TimeOfWorkBindingModel model, TimeOfWork timeOfWork, STODatabase context)
         {
             timeOfWork.Hours = model.Hours;
             return timeOfWork;
