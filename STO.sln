@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STOView", "STOView\STOView.csproj", "{BEED1F99-FDD5-403D-A312-829E49ABB83B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STOBusinessLogic", "STOBusinessLogic\STOBusinessLogic.csproj", "{013DDE5B-8F2A-4F3B-8705-A08FD5A288CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STOBusinessLogic", "STOBusinessLogic\STOBusinessLogic.csproj", "{013DDE5B-8F2A-4F3B-8705-A08FD5A288CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STOContracts", "STOContracts\STOContracts.csproj", "{FD3708F9-CD21-4C00-8495-D74C27038EF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STOContracts", "STOContracts\STOContracts.csproj", "{FD3708F9-CD21-4C00-8495-D74C27038EF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STODatabaseImplement", "STODatabaseImplement\STODatabaseImplement.csproj", "{48D1AFB2-1D85-493F-A04D-6DA27723EF56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STODatabaseImplement", "STODatabaseImplement\STODatabaseImplement.csproj", "{48D1AFB2-1D85-493F-A04D-6DA27723EF56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STOView", "STOView\STOView.csproj", "{BA480846-C4F9-4FA2-88F2-8B19DC93AD6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BEED1F99-FDD5-403D-A312-829E49ABB83B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEED1F99-FDD5-403D-A312-829E49ABB83B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEED1F99-FDD5-403D-A312-829E49ABB83B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEED1F99-FDD5-403D-A312-829E49ABB83B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{013DDE5B-8F2A-4F3B-8705-A08FD5A288CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{013DDE5B-8F2A-4F3B-8705-A08FD5A288CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{013DDE5B-8F2A-4F3B-8705-A08FD5A288CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{48D1AFB2-1D85-493F-A04D-6DA27723EF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48D1AFB2-1D85-493F-A04D-6DA27723EF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48D1AFB2-1D85-493F-A04D-6DA27723EF56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA480846-C4F9-4FA2-88F2-8B19DC93AD6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA480846-C4F9-4FA2-88F2-8B19DC93AD6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA480846-C4F9-4FA2-88F2-8B19DC93AD6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA480846-C4F9-4FA2-88F2-8B19DC93AD6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
