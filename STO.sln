@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STOContracts", "STOContract
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STODatabaseImplement", "STODatabaseImplement\STODatabaseImplement.csproj", "{48D1AFB2-1D85-493F-A04D-6DA27723EF56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STOView", "STOView\STOView.csproj", "{BA480846-C4F9-4FA2-88F2-8B19DC93AD6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STOViewTest", "STOViewTest\STOViewTest.csproj", "{74A6A5CA-923D-46C5-A820-8C8F41687A89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{48D1AFB2-1D85-493F-A04D-6DA27723EF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48D1AFB2-1D85-493F-A04D-6DA27723EF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48D1AFB2-1D85-493F-A04D-6DA27723EF56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA480846-C4F9-4FA2-88F2-8B19DC93AD6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA480846-C4F9-4FA2-88F2-8B19DC93AD6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA480846-C4F9-4FA2-88F2-8B19DC93AD6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA480846-C4F9-4FA2-88F2-8B19DC93AD6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74A6A5CA-923D-46C5-A820-8C8F41687A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74A6A5CA-923D-46C5-A820-8C8F41687A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74A6A5CA-923D-46C5-A820-8C8F41687A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74A6A5CA-923D-46C5-A820-8C8F41687A89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

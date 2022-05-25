@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace STOBusinessLogic.OfficePackage
 {
-    public abstract class AbstractSaveToWord
+  /*  public abstract class AbstractSaveToWord
     {
         public void CreateDocManager(WordInfo info)
         {
@@ -105,5 +105,5 @@ namespace STOBusinessLogic.OfficePackage
         /// </summary>
         /// <param name="info"></param>
         protected abstract void SaveWord(WordInfo info);
-    }
+    }*/
 }

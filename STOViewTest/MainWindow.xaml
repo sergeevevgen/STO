@@ -1,0 +1,20 @@
+﻿<Window x:Class="STOViewTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:STOViewTest"
+        mc:Ignorable="d"
+        Title="СТО 'Руки-Крюки'" Height="450" Width="800">
+    <Grid>
+        <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem x:Name="MenuItemLanches" Header="Обеды" Click="MenuItemLanches_Click"></MenuItem>
+            <MenuItem x:Name="MenuItemLunchSeminar" Header="Привязка обедов" Click="MenuItemLunchSeminar_Click"></MenuItem>
+            <MenuItem x:Name="MenuItemRooms" Header="Номера" Click="MenuItemRooms_Click"></MenuItem>
+            <MenuItem x:Name="MenuItemRoomers" Header="Постояльцы" Click="MenuItemRoomers_Click"></MenuItem>
+            <MenuItem x:Name="MenuItemSeminarsList" Header="Список семинаров" Click="MenuItemSeminarsList_Click"></MenuItem>
+            <MenuItem x:Name="MenuItemReport" Header="Отчёт по обедам" Click="MenuItemReport_Click"></MenuItem>
+            <MenuItem x:Name="MenuItemExit" Header="Выход" Click="MenuItemExit_Click" Margin="150,0,0,0"></MenuItem>
+        </Menu>
+    </Grid>
+</Window>

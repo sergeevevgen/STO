@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace STOBusinessLogic.OfficePackage
 {
-    public abstract class AbstractSaveToPdf
+  /*  public abstract class AbstractSaveToPdf
     {
         public void CreateDocManager(PdfInfo info)
         {
@@ -126,5 +126,5 @@ namespace STOBusinessLogic.OfficePackage
         /// </summary>
         /// <param name="info"></param>
         protected abstract void SavePdf(PdfInfo info);
-    }
+    }*/
 }

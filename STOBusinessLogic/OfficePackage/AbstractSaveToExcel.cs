@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace STOBusinessLogic.OfficePackage
 {
-    public abstract class AbstractSaveToExcel
+   /* public abstract class AbstractSaveToExcel
     {
         public void CreateReportManager(ExcelInfo info)
         {
@@ -120,5 +120,5 @@ namespace STOBusinessLogic.OfficePackage
         /// </summary>
         /// <param name="info"></param>
         protected abstract void SaveExcel(ExcelInfo info);
-    }
+    }*/
 }

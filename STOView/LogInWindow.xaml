@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:STOView"
         mc:Ignorable="d"
-        Title="Авторизация" Height="180" Width="250">
+        Title="Авторизация" Height="180" Width="300">
     <Grid>
         <Grid Margin="0,0,0,0" Width="400" Height="134">
-            <TextBox TextWrapping="Wrap" Margin="30,23,220,91" Height="20"/>
-            <TextBox TextWrapping="Wrap" Margin="30,76,220,38" Width="150" Height="20"/>
+            <TextBox TextWrapping="Wrap" Margin="30,23,128,91" Height="20"/>
+            <TextBox TextWrapping="Wrap" Margin="30,76,128,38" Height="20"/>
             <Button x:Name="ButtonCreate" Content="Создать
                 " HorizontalAlignment="Left" Margin="30,104,0,0" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.547,2.321" Click="Button_Click"/>
-            <Button x:Name="ButtonCancel" Content="Отмена" HorizontalAlignment="Left" Margin="119,104,0,0" VerticalAlignment="Top" Width="61"/>
+            <Button x:Name="ButtonCancel" Content="Отмена" HorizontalAlignment="Left" Margin="85,104,0,0" VerticalAlignment="Top" Width="61" RenderTransformOrigin="-0.246,0.602"/>
+            <Button x:Name="ButtonRegister" Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="151,104,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="-0.361,0.652"/>
             <Label Content="Логин:" Margin="30,0,220,111" Width="150" Height="23"/>
             <Label Content="Пароль:" Margin="30,48,220,63" Width="150" Height="23"/>
         </Grid>
