@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace STOView
 {
     /// <summary>
-    /// Логика взаимодействия для RegistrationWindow.xaml
+    /// Логика взаимодействия для LogInWindow.xaml
     /// </summary>
-    public partial class RegistrationWindow : Window
+    public partial class LogInWindow : Window
     {
-        public RegistrationWindow()
+        public LogInWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
