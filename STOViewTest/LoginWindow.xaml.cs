@@ -23,8 +23,8 @@ namespace STOViewTest
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private readonly IEmployeeLogic _logic;
-        public LoginWindow(IEmployeeLogic logic)
+        private readonly IStoreKeeperLogic _logic;
+        public LoginWindow(IStoreKeeperLogic logic)
         {
             InitializeComponent();
             _logic = logic;
@@ -49,20 +49,20 @@ namespace STOViewTest
                 return;
             }
 
-            var employees = _logic.Read(null);
-            EmployeeViewModel _employee = null;
+            var storekeepers = _logic.Read(null);
+            StoreKeeperViewModel _storekeeper = null;
 
-            foreach (var emp in employees)
+            foreach (var stk in storekeepers)
             {
-                if (emp.Login == TextBoxLogin.Text && emp.Password == TextBoxPassword.Text)
+                if (stk.Login == TextBoxLogin.Text && stk.Password == TextBoxPassword.Text)
                 {
-                    _employee = emp;
+                    _storekeeper = stk;
                 }
             }
 
-            if (_employee != null)
+            if (_storekeeper != null)
             {
-                App.employee = _employee;
+                App.storekeeper = _storekeeper;
                 var form = App.Container.Resolve<MainWindow>();
                 Close();
                 form.ShowDialog();

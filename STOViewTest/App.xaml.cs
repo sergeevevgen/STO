@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using STOBusinessLogic.BusinessLogics;
 using STOContracts.BusinessLogicsContracts;
-//using STOContracts.StoragesContracts;
+using STOContracts.StorageContracts;
 using STOContracts.ViewModels;
 using STOContracts.BindingModels;
 using STODatabaseImplement.Implements;
@@ -25,7 +25,7 @@ namespace STOViewTest
     public partial class App : Application
     {
         private static IUnityContainer container = null;
-        public static EmployeeViewModel employee { get; set; }
+        public static StoreKeeperViewModel storekeeper { get; set; }
         public static IUnityContainer Container
         {
             get
@@ -37,11 +37,11 @@ namespace STOViewTest
                 return container;
             }
         }
-        /* protected override void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
          {
              base.OnStartup(e);
 
-             var mailSender = Container.Resolve<MailLogic>();
+             /*var mailSender = Container.Resolve<MailLogic>();
              mailSender.MailConfig(new MailConfigBindingModel
              {
                  MailLogin = ConfigurationManager.AppSettings["MailLogin"],
@@ -50,23 +50,23 @@ namespace STOViewTest
                  SmtpClientPort = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpClientPort"]),
                  PopHost = ConfigurationManager.AppSettings["PopHost"],
                  PopPort = Convert.ToInt32(ConfigurationManager.AppSettings["PopPort"])
-             });
+             });*/
 
              var authorizationWindow = Container.Resolve<LoginWindow>();
              authorizationWindow.ShowDialog();
-         }*/
+         }
         private static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
-            /*currentContainer.RegisterType<IHeadwaiterStorage, HeadwaiterStorage>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IConferenceStorage, ConferenceStorage>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStoreKeeperStorage, StoreKeeperStorage>(new HierarchicalLifetimeManager());
+            /*currentContainer.RegisterType<IConferenceStorage, ConferenceStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ISeminarStorage, SeminarStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ILunchStorage, LunchStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IRoomStorage, RoomStorage>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IRoomerStorage, RoomerStorage>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IRoomerStorage, RoomerStorage>(new HierarchicalLifetimeManager());*/
 
-            currentContainer.RegisterType<IHeadwaiterLogic, HeadwaiterLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IConferenceLogic, ConferenceLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStoreKeeperLogic, StoreKeeperLogic>(new HierarchicalLifetimeManager());
+            /*currentContainer.RegisterType<IConferenceLogic, ConferenceLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ISeminarLogic, SeminarLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ILunchLogic, LunchLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IRoomLogic, RoomLogic>(new HierarchicalLifetimeManager());

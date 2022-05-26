@@ -24,8 +24,8 @@ namespace STOViewTest
     /// </summary>
     public partial class RegistrationWindow : Window
     {
-        private readonly IEmployeeLogic _logic;
-        public RegistrationWindow(IEmployeeLogic logic)
+        private readonly IStoreKeeperLogic _logic;
+        public RegistrationWindow(IStoreKeeperLogic logic)
         {
             InitializeComponent();
             _logic = logic;
@@ -56,7 +56,7 @@ namespace STOViewTest
 
             try
             {
-                _logic.CreateOrUpdate(new EmployeeBindingModel
+                _logic.CreateOrUpdate(new StoreKeeperBindingModel
                 {
                     FIO = TextBoxFIO.Text,
                     Login = TextBoxLogin.Text,
