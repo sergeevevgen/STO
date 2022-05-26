@@ -68,23 +68,7 @@ namespace STOView
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           /* if (id != null)
-            {
-                var sparepart = _sparePartLogic.Read(new SparePartBindingModel
-                {
-                    Id = id
-                })[0];
 
-                var spareparts = sparepart.SparePartName.ToList();
-                foreach (var seminar in spareparts)
-                {
-                    WorkViewModel current = _logic.Read(new WorkTypeBindingModel
-                    {
-                        Id = seminar.Key
-                    })[0];
-                    ListBoxSeminarsL.Items.Add(seminar);
-                }
-            }*/
         }
     }
 }
