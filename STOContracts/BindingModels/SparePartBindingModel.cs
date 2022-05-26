@@ -24,5 +24,7 @@ namespace STOContracts.BindingModels
         /// Словарь подходящих моделей машин
         /// </summary>
         public Dictionary<int, (string, string)>  Cars { get; set; }
+
+
     }
 }

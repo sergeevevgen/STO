@@ -60,18 +60,18 @@ namespace STOViewTest
             var currentContainer = new UnityContainer();
             currentContainer.RegisterType<IStoreKeeperStorage, StoreKeeperStorage>(new HierarchicalLifetimeManager());
             /*currentContainer.RegisterType<IConferenceStorage, ConferenceStorage>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ISeminarStorage, SeminarStorage>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ILunchStorage, LunchStorage>(new HierarchicalLifetimeManager());*/
+            currentContainer.RegisterType<ISeminarStorage, SeminarStorage>(new HierarchicalLifetimeManager());*/
+            currentContainer.RegisterType<ISparePartStorage, SparePartStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IWorkStorage, WorkStorage>(new HierarchicalLifetimeManager());
-            //currentContainer.RegisterType<IRoomerStorage, RoomerStorage>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IWorkTypeStorage, WorkTypeStorage>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<IStoreKeeperLogic, StoreKeeperLogic>(new HierarchicalLifetimeManager());
             /*currentContainer.RegisterType<IConferenceLogic, ConferenceLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ISeminarLogic, SeminarLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ILunchLogic, LunchLogic>(new HierarchicalLifetimeManager());*/
+            currentContainer.RegisterType<ISeminarLogic, SeminarLogic>(new HierarchicalLifetimeManager());*/
+            currentContainer.RegisterType<ISparePartLogic, SparePartLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IWorkLogic, WorkLogic>(new HierarchicalLifetimeManager());
-            /*currentContainer.RegisterType<IRoomerLogic, RoomerLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IHeadwaiterReportLogic, HeadwaiterReportLogic>(new HierarchicalLifetimeManager());
+            //currentContainer.RegisterType<IRoomerLogic, RoomerLogic>(new HierarchicalLifetimeManager());
+            /*currentContainer.RegisterType<IHeadwaiterReportLogic, HeadwaiterReportLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<MailLogic>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<HeadwaiterAbstractSaveToPdf, HeadwaiterSaveToPdf>(new HierarchicalLifetimeManager());

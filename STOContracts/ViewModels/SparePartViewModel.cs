@@ -30,5 +30,6 @@ namespace STOContracts.ViewModels
         /// Марка и модель
         /// </summary>
         public Dictionary<int, (string, string)> Cars { get; set; }
+
     }
 }

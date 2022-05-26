@@ -12,7 +12,7 @@
             <MenuItem x:Name="MenuItemSparePartsAdd" Header="Привязка запчастей" Click="MenuItemLunchSeminar_Click"></MenuItem>
             <MenuItem x:Name="MenuItemSpareParts" Header="Запчасти" Click="MenuItemRooms_Click"></MenuItem>
             <MenuItem x:Name="MenuItemTimeOfWorks" Header="Продолжительность работ" Click="MenuItemRoomers_Click"></MenuItem>
-            <MenuItem x:Name="MenuItemWorkAdd" Header="Привязка работ" Click="MenuItemSeminarsList_Click"></MenuItem>
+            <MenuItem x:Name="MenuItemWorkTypeAdd" Header="Добавить тип работ" Click="MenuAddWorkType_Click"></MenuItem>
             <MenuItem x:Name="MenuItemStorePartReport" Header="Отчёт по запчастям" Click="MenuItemReport_Click"></MenuItem>
             <MenuItem x:Name="MenuItemExit" Header="Выход" Click="MenuItemExit_Click" Margin="150,0,0,0"></MenuItem>
         </Menu>
