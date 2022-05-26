@@ -23,23 +23,23 @@ namespace STOView
     /// </summary>
     public partial class WorkTypeWindow : Window
     {
-        //private readonly ILunchLogic _logic;
-        //private readonly ISeminarLogic _seminarLogic;
+        private readonly IWorkLogic _logic;
+        private readonly ISparePartLogic _sparePartLogic;
         public int Id { set { id = value; } }
         private int? id;
 
-        public WorkTypeWindow(/*ILunchLogic logic, ISeminarLogic seminarLogic*/)
+        public WorkTypeWindow(IWorkLogic logic, ISparePartLogic sparePartLogic)
         {
             InitializeComponent();
-            /*_logic = logic;
-            _seminarLogic = seminarLogic;*/
+            _logic = logic;
+            _sparePartLogic = sparePartLogic;
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(TextBoxName.Text))
             {
-                MessageBox.Show("Введите название обеда", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введите название типа работ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             try
@@ -68,25 +68,23 @@ namespace STOView
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (id != null)
+           /* if (id != null)
             {
-                var lunch = _logic.Read(new WorkTypeBindingModel
+                var sparepart = _sparePartLogic.Read(new SparePartBindingModel
                 {
                     Id = id
                 })[0];
 
-                var listSeminars = lunch.LunchSeminars.ToList();
-                foreach (var seminar in listSeminars)
+                var spareparts = sparepart.SparePartName.ToList();
+                foreach (var seminar in spareparts)
                 {
-                    WorkTypeBindingModel current = _seminarLogic.Read(new WorkTypeBindingModel
+                    WorkViewModel current = _logic.Read(new WorkTypeBindingModel
                     {
                         Id = seminar.Key
                     })[0];
                     ListBoxSeminarsL.Items.Add(seminar);
                 }
-
-                TextBoxName.Text = lunch.Name;
-            }
+            }*/
         }
     }
 }

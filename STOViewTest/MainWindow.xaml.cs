@@ -26,10 +26,10 @@ namespace STOViewTest
         {
             InitializeComponent();
         }
-        private void MenuItemLanches_Click(object sender, RoutedEventArgs e)
+        private void MenuItemWorks_Click(object sender, RoutedEventArgs e)
         {
-            /*var form = App.Container.Resolve<LunchesWindow>();
-            form.ShowDialog();*/
+            var form = App.Container.Resolve<WorkWindow>();
+            form.ShowDialog();
         }
 
         private void MenuItemLunchSeminar_Click(object sender, RoutedEventArgs e)
