@@ -1,4 +1,5 @@
-﻿using System;
+﻿using STOView;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,8 +40,8 @@ namespace STOViewTest
 
         private void MenuItemRooms_Click(object sender, RoutedEventArgs e)
         {
-            /*var form = App.Container.Resolve<RoomsWindow>();
-            form.ShowDialog();*/
+            var form = App.Container.Resolve<WorksWindow>();
+            form.ShowDialog();
         }
 
         private void MenuItemRoomers_Click(object sender, RoutedEventArgs e)
