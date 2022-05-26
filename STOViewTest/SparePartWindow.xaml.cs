@@ -58,7 +58,7 @@ namespace STOView
                     Id = id,
                     SparePartName = TextBoxName.Text,
                     FactoryNumber = TextBoxFactoryNum.Text,
-                    Price = Convert.ToInt32(TextBoxPrice.Text)
+                    Price = Convert.ToDecimal(TextBoxPrice.Text)
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
@@ -78,16 +78,34 @@ namespace STOView
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (id != null)
+            if (id.HasValue)
             {
-                var sparepart = _logic.Read(new SparePartBindingModel
+                try
+                {
+                    var view = _logic.Read(new SparePartBindingModel { Id = id })?[0];
+                    if (view != null)
+                    {
+                        TextBoxName.Text = view.SparePartName;
+                        TextBoxFactoryNum.Text = view.FactoryNumber;
+                        view.Price = Convert.ToDecimal(TextBoxPrice.Text);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK,
+                   MessageBoxImage.Error);
+                }
+
+
+
+               /* var sparepart = _logic.Read(new SparePartBindingModel
                 {
                     Id = id
                 })[0];
 
                 TextBoxName.Text = sparepart.SparePartName;
                 TextBoxFactoryNum.Text = sparepart.FactoryNumber;
-                sparepart.Price = Convert.ToDecimal(TextBoxPrice.Text);
+                sparepart.Price = Convert.ToDecimal(TextBoxPrice.Text);*/
             }
         }
     }
