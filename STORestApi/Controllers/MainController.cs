@@ -37,10 +37,12 @@ namespace STORestApi.Controllers
         public List<WorkTypeViewModel> GetWorkTypeList() => _work.ReadType(null)?.ToList();
 
         [HttpGet]
-        public List<ServiceRecordViewModel> GetRecords(int car) => _service.Read(new ServiceRecordBindingModel { CarId = car });
+        public List<ServiceRecordViewModel> GetRecords(int carId) => _service.Read(new ServiceRecordBindingModel { CarId = carId });
 
         [HttpPost]
         public void CreateTO(CreateTOBindingModel model) => _tO
             .CreateTO(model);
+        [HttpPost]
+        public void AddCar(CarBindingModel model) => _car.CreateOrUpdate(model);
     }
 }

@@ -160,16 +160,40 @@ namespace STOEmployeeApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Records(int car)
+        public IActionResult Records(int Id)
         {
             if (Program.Employee == null)
             {
                 return Redirect("~/Home/Enter");
             }
             return
-            View(APIClient.GetRequest<List<ServiceRecordViewModel>>($"api/main/getrecords?carId={car}"));
+            View(APIClient.GetRequest<List<ServiceRecordViewModel>>($"api/main/getrecords?carId={Id}"));
         }
 
+        [HttpGet]
+        public IActionResult CreateCar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public void CreateCar(string carBrand, string carModel, string VIN, string ownerPhoneNumber)
+        {
+            if (!string.IsNullOrEmpty(carBrand) && !string.IsNullOrEmpty(carModel)
+            && !string.IsNullOrEmpty(VIN) && !string.IsNullOrEmpty(ownerPhoneNumber))
+            {
+                APIClient.PostRequest("api/main/addcar", new CarBindingModel
+                {
+                    CarBrand = carBrand,
+                    CarModel = carModel,
+                    VIN = VIN,
+                    OwnerPhoneNumber = ownerPhoneNumber
+                });
+                Response.Redirect("Cars");
+                return;
+            }
+            throw new Exception("Введите марку, модель, VIN и номер телефона владельца");
+        }
         //[HttpPost]
         //public decimal Calc(List<(int, int)> list)
         //{
