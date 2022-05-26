@@ -63,7 +63,7 @@ namespace STOViewTest
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
         {
-            App.employee = null;
+            App.storekeeper = null;
             var windowSignIn = App.Container.Resolve<LoginWindow>();
             Close();
             windowSignIn.ShowDialog();
