@@ -86,8 +86,6 @@ namespace STODatabaseImplement.Implements
         {
             using var context = new STODatabase();
             return context.Cars
-            .Include(rec => rec.CarSpareParts)
-            .ThenInclude(rec => rec.SparePart)
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -101,8 +99,6 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             var car = context.Cars
-            .Include(rec => rec.CarSpareParts)
-            .ThenInclude(rec => rec.SparePart)
             .FirstOrDefault(rec => rec.VIN == model.VIN ||
             rec.Id == model.Id);
             return car != null ? CreateModel(car) : null;
@@ -116,8 +112,6 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             return context.Cars
-            .Include(rec => rec.CarSpareParts)
-            .ThenInclude(rec => rec.SparePart)
             .Where(rec => (rec.CarModel != string.Empty && rec.CarModel.Contains(model.CarModel)) || (rec.CarBrand != string.Empty && rec.CarBrand.Contains(model.CarBrand)))
             .ToList()
             .Select(CreateModel)

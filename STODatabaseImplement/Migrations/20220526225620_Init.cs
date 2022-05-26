@@ -141,32 +141,6 @@ namespace STODatabaseImplement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CarSpareParts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    SparePartId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CarSpareParts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CarSpareParts_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CarSpareParts_SpareParts_SparePartId",
-                        column: x => x.SparePartId,
-                        principalTable: "SpareParts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "WorkTypes",
                 columns: table => new
                 {
@@ -271,16 +245,6 @@ namespace STODatabaseImplement.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarSpareParts_CarId",
-                table: "CarSpareParts",
-                column: "CarId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CarSpareParts_SparePartId",
-                table: "CarSpareParts",
-                column: "SparePartId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ServiceRecords_CarId",
                 table: "ServiceRecords",
                 column: "CarId");
@@ -334,9 +298,6 @@ namespace STODatabaseImplement.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "CarSpareParts");
-
             migrationBuilder.DropTable(
                 name: "ServiceRecords");
 

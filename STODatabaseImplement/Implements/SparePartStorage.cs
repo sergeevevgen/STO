@@ -43,8 +43,6 @@ namespace STODatabaseImplement.Implements
             var work = context.SpareParts
             .Include(rec => rec.WorkSpareParts)
             .ThenInclude(rec => rec.SparePart)
-            .Include(rec => rec.CarSpareParts)
-            .ThenInclude(rec => rec.Car)
             .FirstOrDefault(rec => rec.FactoryNumber == model.FactoryNumber ||
             rec.Id == model.Id);
             return work != null ? CreateModel(work) : null;
@@ -60,8 +58,6 @@ namespace STODatabaseImplement.Implements
             return context.SpareParts
             .Include(rec => rec.WorkSpareParts)
             .ThenInclude(rec => rec.SparePart)
-            .Include(rec => rec.CarSpareParts)
-            .ThenInclude(rec => rec.Car)
             .Where(rec => rec.SparePartName.Contains(model.SparePartName) || (rec.FactoryNumber != string.Empty && rec.FactoryNumber.Equals(model.FactoryNumber)) || rec.Id == model.Id || rec.Price < model.Price)
             .ToList()
             .Select(CreateModel)
@@ -74,8 +70,6 @@ namespace STODatabaseImplement.Implements
             return context.SpareParts
            .Include(rec => rec.WorkSpareParts)
             .ThenInclude(rec => rec.SparePart)
-            .Include(rec => rec.CarSpareParts)
-            .ThenInclude(rec => rec.Car)
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -98,7 +92,6 @@ namespace STODatabaseImplement.Implements
                 };
                 context.SpareParts.Add(sparePart);
                 context.SaveChanges();
-                CreateModel(model, sparePart, context);
                 transaction.Commit();
             }
             catch
@@ -120,7 +113,7 @@ namespace STODatabaseImplement.Implements
                 {
                     throw new Exception("Элемент не найден");
                 }
-                CreateModel(model, element, context);
+                CreateModel(model, element);
                 context.SaveChanges();
                 transaction.Commit();
             }
@@ -141,43 +134,16 @@ namespace STODatabaseImplement.Implements
                 Price = sparePart.Price,
                 Status = sparePart.Status.ToString(),
                 UMeasurement = sparePart.UMeasurement.ToString(),
-                Cars = sparePart.CarSpareParts
-                .ToDictionary(recPC => recPC.SparePartId,
-                recPC => (recPC.Car.CarBrand, recPC.Car.CarModel))
             };
         }
 
-        private static SparePart CreateModel(SparePartBindingModel model, SparePart sparePart, STODatabase context)
+        private static SparePart CreateModel(SparePartBindingModel model, SparePart sparePart)
         {
             sparePart.SparePartName = model.SparePartName;
             sparePart.Price = model.Price;
             sparePart.FactoryNumber = model.FactoryNumber;
             sparePart.Status = model.Status;
             sparePart.UMeasurement = model.UMeasurement;
-            if (model.Id.HasValue)
-            {
-                var carSpareParts = context.CarSpareParts
-                    .Where(rec => rec.SparePartId == model.Id.Value)
-                    .ToList();
-
-                context.CarSpareParts
-                    .RemoveRange(carSpareParts
-                    .Where(rec => !model.Cars
-                    .ContainsKey(rec.CarId))
-                    .ToList());
-                    
-                context.SaveChanges();
-
-                foreach(var update in carSpareParts)
-                {
-                    context.CarSpareParts.Add(new CarSparePart
-                    {
-                        SparePartId = sparePart.Id,
-                        CarId = update.CarId
-                    });
-                    context.SaveChanges();
-                }
-            }
             return sparePart;
         }
     }

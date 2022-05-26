@@ -2,13 +2,19 @@
     ViewData["Title"] = "Create";
 }
 <div class="text-center">
-    <h2 class="display-4">Создание ТО/h2>
+    <h2 class="display-4">Создание ТО</h2>
 </div>
 <form method="post">
     <div class="row">
         <div class="col-4">Работы:</div>
         <div class="col-8">
             <select id="work" name="work" class="form-control" asp-items="@(new SelectList(@ViewBag.Works,"Id", "WorkName"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Работы:</div>
+        <div class="col-8">
+            <select id="car" name="car" class="form-control" asp-items="@(new SelectList(@ViewBag.Cars, "Id", "CarBrand", "CarModel", "VIN"))"></select>
         </div>
     </div>
     <div class="row">

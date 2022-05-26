@@ -11,6 +11,7 @@ namespace STOContracts.BusinessLogicsContracts
     public interface IWorkLogic
     {
         List<WorkViewModel> Read(WorkBindingModel model);
+        List<WorkTypeViewModel> ReadType(WorkTypeBindingModel model);
         void CreateOrUpdate(WorkTypeBindingModel model);
 
         void CreateWork(CreateWorkBindingModel model);

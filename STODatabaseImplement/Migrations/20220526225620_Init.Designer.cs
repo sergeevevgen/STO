@@ -12,7 +12,7 @@ using STODatabaseImplement;
 namespace STODatabaseImplement.Migrations
 {
     [DbContext(typeof(STODatabase))]
-    [Migration("20220526203048_Init")]
+    [Migration("20220526225620_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -52,29 +52,6 @@ namespace STODatabaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("STODatabaseImplement.Models.CarSparePart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SparePartId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("SparePartId");
-
-                    b.ToTable("CarSpareParts");
                 });
 
             modelBuilder.Entity("STODatabaseImplement.Models.Employee", b =>
@@ -349,25 +326,6 @@ namespace STODatabaseImplement.Migrations
                     b.ToTable("WorkTypes");
                 });
 
-            modelBuilder.Entity("STODatabaseImplement.Models.CarSparePart", b =>
-                {
-                    b.HasOne("STODatabaseImplement.Models.Car", "Car")
-                        .WithMany("CarSpareParts")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("STODatabaseImplement.Models.SparePart", "SparePart")
-                        .WithMany("CarSpareParts")
-                        .HasForeignKey("SparePartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("SparePart");
-                });
-
             modelBuilder.Entity("STODatabaseImplement.Models.ServiceRecord", b =>
                 {
                     b.HasOne("STODatabaseImplement.Models.Car", "Car")
@@ -470,8 +428,6 @@ namespace STODatabaseImplement.Migrations
                 {
                     b.Navigation("CarRecords");
 
-                    b.Navigation("CarSpareParts");
-
                     b.Navigation("CarsTO");
                 });
 
@@ -482,8 +438,6 @@ namespace STODatabaseImplement.Migrations
 
             modelBuilder.Entity("STODatabaseImplement.Models.SparePart", b =>
                 {
-                    b.Navigation("CarSpareParts");
-
                     b.Navigation("WorkSpareParts");
                 });
 

@@ -25,10 +25,5 @@ namespace STOContracts.ViewModels
 
         [DisplayName("Единица измерения")]
         public string UMeasurement { get; set; }
-
-        /// <summary>
-        /// Марка и модель
-        /// </summary>
-        public Dictionary<int, (string, string)> Cars { get; set; }
     }
 }

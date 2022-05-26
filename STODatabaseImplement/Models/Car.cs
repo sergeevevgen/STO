@@ -35,11 +35,5 @@ namespace STODatabaseImplement.Models
         /// </summary>
         [ForeignKey("CarId")]
         public virtual List<TO> CarsTO { get; set; }
-
-        /// <summary>
-        /// Внешний ключ (связь один ко многим)
-        /// </summary>
-        [ForeignKey("CarId")]
-        public virtual List<CarSparePart> CarSpareParts { get; set; }
     }
 }

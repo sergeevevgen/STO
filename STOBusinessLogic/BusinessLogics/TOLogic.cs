@@ -14,10 +14,11 @@ namespace STOBusinessLogic.BusinessLogics
     public class TOLogic : ITOLogic
     {
         private readonly ITOStorage _tOStorage;
-
-        public TOLogic(ITOStorage tOStorage)
+        private readonly IServiceRecordLogic _serviceRecordLogic;
+        public TOLogic(ITOStorage tOStorage, IServiceRecordLogic serviceRecordLogic)
         {
             _tOStorage = tOStorage;
+            _serviceRecordLogic = serviceRecordLogic;
         }
 
         public void CloseTO(ChangeTOStatusBindingModel model)
@@ -41,6 +42,13 @@ namespace STOBusinessLogic.BusinessLogics
                 DateCreate = tO.DateCreate,
                 DateImplement = tO.DateImplement,
                 DateOver = tO.DateOver
+            });
+            _serviceRecordLogic.CreateOrUpdate(new ServiceRecordBindingModel 
+            {
+                CarId = tO.CarId,
+                DateBegin = tO.DateCreate,
+                DateEnd = tO.DateOver,
+                Description = tO.TOWorks.ToString()
             });
         }
 

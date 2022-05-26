@@ -19,10 +19,5 @@ namespace STOContracts.BindingModels
         public SparePartStatus Status { get; set; }
 
         public UnitMeasurement UMeasurement { get; set; }
-
-        /// <summary>
-        /// Словарь подходящих моделей машин
-        /// </summary>
-        public Dictionary<int, (string, string)>  Cars { get; set; }
     }
 }

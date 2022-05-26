@@ -51,9 +51,7 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             return context.TOs
-            .Include(rec => rec.TOWorks)
-            .ThenInclude(rec => rec.Work)
-            .Where(rec => rec.Id.Equals(model.Id) || rec.Status == model.Status || (rec.DateCreate.Date >= model.DateCreate.Date && rec.DateCreate.Date <= model.DateOver.Value.Date))
+            .Where(rec => rec.Id.Equals(model.Id) || (model.EmployeeId.HasValue && rec.EmployeeId == model.EmployeeId))
             .ToList()
             .Select(CreateModel)
             .ToList();

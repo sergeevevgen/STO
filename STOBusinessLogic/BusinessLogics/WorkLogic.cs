@@ -112,6 +112,21 @@ namespace STOBusinessLogic.BusinessLogics
             return _workStorage.GetFilteredList(model);
         }
 
+        public List<WorkTypeViewModel> ReadType(WorkTypeBindingModel model)
+        {
+            if (model == null)
+            {
+                return _workTypeStorage.GetFullList();
+            }
+
+            if (model.Id.HasValue)
+            {
+                return new List<WorkTypeViewModel>() { _workTypeStorage.GetElement(model) };
+            }
+
+            return _workTypeStorage.GetFilteredList(model);
+        }
+
         public void TakeWorkInWork(ChangeWorkStatusBindingModel model)
         {
             var work = _workStorage.GetElement(new WorkBindingModel { Id = model.WorkId });

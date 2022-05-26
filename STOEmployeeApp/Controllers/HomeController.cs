@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace STOEmployeeApp.Controllers
 {
@@ -124,13 +126,13 @@ namespace STOEmployeeApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.TOs =
-            APIClient.GetRequest<List<TOViewModel>>("api/main/getcarlist");
+            ViewBag.Cars = APIClient.GetRequest<List<CarViewModel>>("api/main/getcarlist");
+            ViewBag.Works = new MultiSelectList(APIClient.GetRequest<List<WorkTypeViewModel>>("api/main/getworktypelist"), "Id", "WorkName", "Hours");
             return View();
         }
 
         [HttpPost]
-        public void Create(int to, int car, decimal sum, Dictionary<int, (string, int)> list)
+        public void Create(int car, int work, decimal sum)
         {
             if (sum == 0)
             {
@@ -142,9 +144,30 @@ namespace STOEmployeeApp.Controllers
                 EmployeeId = Program.Employee.Id,
                 CarId = car,
                 Sum = sum,
-                TOWorks = list.ToDictionary(rec => rec.Key, rec=> (rec.Value.Item1, rec.Value.Item2))
+                TOWorks = new Dictionary<int, (string, int)> { }
             });
             Response.Redirect("Index");
+        }
+
+        public IActionResult Cars()
+        {
+            if (Program.Employee == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return
+            View(APIClient.GetRequest<List<CarViewModel>>("api/main/getcarlist"));
+        }
+
+        [HttpGet]
+        public IActionResult Records(int car)
+        {
+            if (Program.Employee == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return
+            View(APIClient.GetRequest<List<ServiceRecordViewModel>>($"api/main/getrecords?carId={car}"));
         }
 
         //[HttpPost]
