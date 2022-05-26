@@ -26,10 +26,10 @@ namespace STOViewTest
         {
             InitializeComponent();
         }
-        private void MenuItemLanches_Click(object sender, RoutedEventArgs e)
+        private void MenuItemWorks_Click(object sender, RoutedEventArgs e)
         {
-            /*var form = App.Container.Resolve<LunchesWindow>();
-            form.ShowDialog();*/
+            var form = App.Container.Resolve<WorkWindow>();
+            form.ShowDialog();
         }
 
         private void MenuItemLunchSeminar_Click(object sender, RoutedEventArgs e)
@@ -40,7 +40,7 @@ namespace STOViewTest
 
         private void MenuItemRooms_Click(object sender, RoutedEventArgs e)
         {
-            var form = App.Container.Resolve<WorksWindow>();
+            var form = App.Container.Resolve<SparePartWindow>();
             form.ShowDialog();
         }
 
@@ -50,10 +50,10 @@ namespace STOViewTest
             form.ShowDialog();*/
         }
 
-        private void MenuItemSeminarsList_Click(object sender, RoutedEventArgs e)
+        private void MenuAddWorkType_Click(object sender, RoutedEventArgs e)
         {
-           /* var form = App.Container.Resolve<GetSeminarListWindow>();
-            form.ShowDialog();*/
+            var form = App.Container.Resolve<WorkTypeWindow>();
+            form.ShowDialog();
         }
 
         private void MenuItemReport_Click(object sender, RoutedEventArgs e)
