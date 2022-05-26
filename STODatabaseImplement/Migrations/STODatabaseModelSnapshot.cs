@@ -218,7 +218,7 @@ namespace STODatabaseImplement.Migrations
                     b.Property<DateTime?>("DateOver")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -386,7 +386,9 @@ namespace STODatabaseImplement.Migrations
 
                     b.HasOne("STODatabaseImplement.Models.Employee", "Employee")
                         .WithMany("TOs")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Car");
 

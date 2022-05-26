@@ -130,7 +130,7 @@ namespace STODatabaseImplement.Implements
             {
                 Id = car.Id,
                 CarBrand = car.CarBrand,
-                CarModel = car.CarModel,
+                CarModel = car.CarModel, 
                 VIN = car.VIN,
                 OwnerPhoneNumber = car.OwnerPhoneNumber
             };

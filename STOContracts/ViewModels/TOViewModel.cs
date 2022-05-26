@@ -11,7 +11,10 @@ namespace STOContracts.ViewModels
     { 
         public int Id { get; set; }
         public int CarId { get; set; }
-        public int? EmployeeId { get; set; }
+        public string CarMark { get; set; }
+        public string CarModel { get; set; }
+        public string CarVIN { get; set; }
+        public int EmployeeId { get; set; }
         [DisplayName("Работник")]
         public string EmployeeFIO { get; set; }
         public Dictionary<int, (string, int)> TOWorks { get; set; }

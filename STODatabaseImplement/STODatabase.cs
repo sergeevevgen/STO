@@ -19,11 +19,6 @@ namespace STODatabaseImplement
             }
             base.OnConfiguring(optionsBuilder);
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<TO>().Property(m => m.EmployeeId).IsRequired(false);
-            base.OnModelCreating(modelBuilder);
-        }
 
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<StoreKeeper> StoreKeepers { get; set; }

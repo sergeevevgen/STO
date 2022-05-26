@@ -125,7 +125,7 @@ namespace STODatabaseImplement.Implements
         {
             tO.Sum = model.Sum;
             tO.CarId = model.CarId;
-            tO.EmployeeId = model.EmployeeId;
+            tO.EmployeeId = model.EmployeeId.Value;
             tO.Status = model.Status;
             tO.DateCreate = model.DateCreate;
             tO.DateImplement = model.DateImplement;
@@ -171,8 +171,11 @@ namespace STODatabaseImplement.Implements
             {
                 Id = to.Id,
                 EmployeeId = to.EmployeeId,
-                EmployeeFIO = to.EmployeeId.HasValue ? to.Employee.FIO : string.Empty,
-                
+                EmployeeFIO = to.Employee.FIO,
+                CarId = to.CarId,
+                CarMark = to.Car.CarBrand,
+                CarModel = to.Car.CarModel,
+                CarVIN = to.Car.VIN,
                 Sum = to.Sum,
                 Status = to.Status.ToString(),
                 DateCreate = to.DateCreate,

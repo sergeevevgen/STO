@@ -13,7 +13,7 @@ namespace STODatabaseImplement.Models
     {
         public int Id { get; set; }
         public int CarId { get; set; }
-        public int? EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         [Required]
         public decimal Sum { get; set; }
         [Required]

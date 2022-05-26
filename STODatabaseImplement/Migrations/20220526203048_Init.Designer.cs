@@ -12,7 +12,7 @@ using STODatabaseImplement;
 namespace STODatabaseImplement.Migrations
 {
     [DbContext(typeof(STODatabase))]
-    [Migration("20220526183821_Init")]
+    [Migration("20220526203048_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -221,7 +221,7 @@ namespace STODatabaseImplement.Migrations
                     b.Property<DateTime?>("DateOver")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -389,7 +389,9 @@ namespace STODatabaseImplement.Migrations
 
                     b.HasOne("STODatabaseImplement.Models.Employee", "Employee")
                         .WithMany("TOs")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Car");
 
