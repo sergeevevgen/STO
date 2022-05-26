@@ -41,8 +41,6 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             var work = context.SpareParts
-            .Include(rec => rec.WorkSpareParts)
-            .ThenInclude(rec => rec.SparePart)
             .FirstOrDefault(rec => rec.FactoryNumber == model.FactoryNumber ||
             rec.Id == model.Id);
             return work != null ? CreateModel(work) : null;
@@ -56,8 +54,6 @@ namespace STODatabaseImplement.Implements
             }
             using var context = new STODatabase();
             return context.SpareParts
-            .Include(rec => rec.WorkSpareParts)
-            .ThenInclude(rec => rec.SparePart)
             .Where(rec => rec.SparePartName.Contains(model.SparePartName) || (rec.FactoryNumber != string.Empty && rec.FactoryNumber.Equals(model.FactoryNumber)) || rec.Id == model.Id || rec.Price < model.Price)
             .ToList()
             .Select(CreateModel)
@@ -68,8 +64,6 @@ namespace STODatabaseImplement.Implements
         {
             using var context = new STODatabase();
             return context.SpareParts
-           .Include(rec => rec.WorkSpareParts)
-            .ThenInclude(rec => rec.SparePart)
             .ToList()
             .Select(CreateModel)
             .ToList();
