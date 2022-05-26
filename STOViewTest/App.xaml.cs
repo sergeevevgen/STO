@@ -61,16 +61,16 @@ namespace STOViewTest
             currentContainer.RegisterType<IStoreKeeperStorage, StoreKeeperStorage>(new HierarchicalLifetimeManager());
             /*currentContainer.RegisterType<IConferenceStorage, ConferenceStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ISeminarStorage, SeminarStorage>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ILunchStorage, LunchStorage>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IRoomStorage, RoomStorage>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IRoomerStorage, RoomerStorage>(new HierarchicalLifetimeManager());*/
+            currentContainer.RegisterType<ILunchStorage, LunchStorage>(new HierarchicalLifetimeManager());*/
+            currentContainer.RegisterType<IWorkStorage, WorkStorage>(new HierarchicalLifetimeManager());
+            //currentContainer.RegisterType<IRoomerStorage, RoomerStorage>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<IStoreKeeperLogic, StoreKeeperLogic>(new HierarchicalLifetimeManager());
             /*currentContainer.RegisterType<IConferenceLogic, ConferenceLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ISeminarLogic, SeminarLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ILunchLogic, LunchLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IRoomLogic, RoomLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IRoomerLogic, RoomerLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ILunchLogic, LunchLogic>(new HierarchicalLifetimeManager());*/
+            currentContainer.RegisterType<IWorkLogic, WorkLogic>(new HierarchicalLifetimeManager());
+            /*currentContainer.RegisterType<IRoomerLogic, RoomerLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IHeadwaiterReportLogic, HeadwaiterReportLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<MailLogic>(new HierarchicalLifetimeManager());
 
