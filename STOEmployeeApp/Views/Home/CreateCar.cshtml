@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "CreateCar";
+}
+<div class="text-center">
+    <h2 class="display-4">Добавление автомобиля</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Марка авто:</div>
+        <div class="col-8">
+            <input type="text" name="carBrand" id="carBrand"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Модель авто:</div>
+        <div class="col-8">
+            <input type="text" name="carModel" id="carModel"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">VIN:</div>
+        <div class="col-8">
+            <input type="text" name="VIN" id="VIN"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Номер владельца:</div>
+        <div class="col-8">
+            <input type="text" name="ownerPhoneNumber" id="ownerPhoneNumber"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4"><input type="submit" value="Добавить" class="btn btnprimary" /></div>
+    </div>
+</form>

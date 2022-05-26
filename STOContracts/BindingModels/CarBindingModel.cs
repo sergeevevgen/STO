@@ -39,6 +39,6 @@ namespace STOContracts.BindingModels
         /// <summary>
         /// Записи сервисов
         /// </summary>
-        public Dictionary<int, (DateTime, string)> CarRecords { get; set; }
+        public Dictionary<int, (DateTime, string)>? CarRecords { get; set; }
     }
 }
