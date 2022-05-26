@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STODatabaseImplement", "STO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STOView", "STOViewTest\STOView.csproj", "{74A6A5CA-923D-46C5-A820-8C8F41687A89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STORestApi", "STORestApi\STORestApi.csproj", "{E3E80F02-B357-4716-8EA1-B44DDF0B167E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STORestApi", "STORestApi\STORestApi.csproj", "{E3E80F02-B357-4716-8EA1-B44DDF0B167E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STOEmployeeApp", "STOEmployeeApp\STOEmployeeApp.csproj", "{DAC77DEF-38AF-4ED5-A8A9-0D4779C5275A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{E3E80F02-B357-4716-8EA1-B44DDF0B167E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3E80F02-B357-4716-8EA1-B44DDF0B167E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3E80F02-B357-4716-8EA1-B44DDF0B167E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC77DEF-38AF-4ED5-A8A9-0D4779C5275A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC77DEF-38AF-4ED5-A8A9-0D4779C5275A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC77DEF-38AF-4ED5-A8A9-0D4779C5275A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC77DEF-38AF-4ED5-A8A9-0D4779C5275A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
