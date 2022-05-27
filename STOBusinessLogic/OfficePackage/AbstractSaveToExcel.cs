@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace STOBusinessLogic.OfficePackage
 {
-   /* public abstract class AbstractSaveToExcel
+    public abstract class AbstractSaveToExcel
     {
         public void CreateReportManager(ExcelInfo info)
         {
@@ -26,17 +26,17 @@ namespace STOBusinessLogic.OfficePackage
                 CellToName = "C1"
             });
             uint rowIndex = 2;
-            foreach (var lpd in info.LoanProgramDeposit)
+            foreach (var lpd in info.SparePartsWork)
             {
                 InsertCellInWorksheet(new ExcelCellParameters
                 {
                     ColumnName = "A",
                     RowIndex = rowIndex,
-                    Text = lpd.LoanProgramName,
+                    Text = lpd.Work,
                     StyleInfo = ExcelStyleInfoType.Text
                 });
                 rowIndex++;
-                foreach (var dep in lpd.Deposits)
+                foreach (var dep in lpd.Work)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
@@ -120,5 +120,5 @@ namespace STOBusinessLogic.OfficePackage
         /// </summary>
         /// <param name="info"></param>
         protected abstract void SaveExcel(ExcelInfo info);
-    }*/
+    }
 }

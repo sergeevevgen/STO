@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace STOBusinessLogic.OfficePackage
 {
-  /*  public abstract class AbstractSaveToWord
+    public abstract class AbstractSaveToWord
     {
         public void CreateDocManager(WordInfo info)
         {
@@ -23,7 +23,7 @@ namespace STOBusinessLogic.OfficePackage
                     JustificationType = WordJustificationType.Center
                 }
             });
-            foreach (var lpd in info.LoanProgramDeposit)
+            foreach (var lpd in info.SparePartsWorks)
             {
                 CreateParagraph(new WordParagraph
                 {
@@ -63,7 +63,7 @@ namespace STOBusinessLogic.OfficePackage
                     JustificationType = WordJustificationType.Center
                 }
             });
-            foreach (var cc in info.ClientCurrency)
+            foreach (var cc in info.CarTos)
             {
                 CreateParagraph(new WordParagraph
                 {
@@ -105,5 +105,5 @@ namespace STOBusinessLogic.OfficePackage
         /// </summary>
         /// <param name="info"></param>
         protected abstract void SaveWord(WordInfo info);
-    }*/
+    }
 }

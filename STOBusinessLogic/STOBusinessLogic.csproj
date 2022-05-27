@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\STOContracts\STOContracts.csproj" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.16.0" />
+    <PackageReference Include="PDFsharp-MigraDoc" Version="1.50.5147" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="OfficePackage\Implements\" />
+    <ProjectReference Include="..\STOContracts\STOContracts.csproj" />
   </ItemGroup>
 
 </Project>

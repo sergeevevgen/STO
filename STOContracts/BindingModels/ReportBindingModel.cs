@@ -13,7 +13,7 @@ namespace STOContracts.BindingModels
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
         public List<TOViewModel>? TOs { get; set; }
-        //public List<LoanProgramViewModel>? LoanPrograms { get; set; }
+        public List<WorkViewModel>? Works { get; set; }
         public int EmployeeId { get; set; }
         public int StoreKeeperId { get; set; }
     }
