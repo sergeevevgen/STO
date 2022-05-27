@@ -25,14 +25,16 @@ namespace STOView
     {
         private readonly IWorkLogic _logic;
         private readonly ISparePartLogic _sparePartLogic;
+        private readonly ITimeOfWorkLogic _timeOfWorkLogic;
         public int Id { set { id = value; } }
         private int? id;
 
-        public WorkTypeWindow(IWorkLogic logic, ISparePartLogic sparePartLogic)
+        public WorkTypeWindow(IWorkLogic logic, ISparePartLogic sparePartLogic, ITimeOfWorkLogic timeOfWorkLogic)
         {
             InitializeComponent();
             _logic = logic;
             _sparePartLogic = sparePartLogic;
+            _timeOfWorkLogic = timeOfWorkLogic;
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -68,7 +70,40 @@ namespace STOView
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            var list = _timeOfWorkLogic.Read(null);
+            if (list != null)
+                {
+                    ComboBoxTimeOfWork.ItemsSource = list;
+                }
+            var xa = _sparePartLogic.Read(null);
+            if (xa != null)
+                {
+                    ComboBoxSparePartsWT.ItemsSource = xa;
+                }
+            /*if (id != null)
+            {
+                var worktype = _logic.Read(new WorkBindingModel
+                {
+                    Id = id
+                })[0];
 
+                var listSpareParts = worktype.WorkSpareParts.ToList();
+                foreach (var sparept in listSpareParts)
+                {
+                    var timeofw = _timeOfWorkLogic.Read(null);
+                    if (list != null)
+                    {
+                        ListBoxSparePartsWT.Items.Add(timeofw);
+                    }
+                    /*SparePartViewModel current = _sparePartLogic.Read(new SparePartBindingModel
+                    {
+                        Id = sparept.Key
+                    })[0];
+                    ListBoxSparePartsWT.Items.Add(sparept);
+        }
+
+                TextBoxName.Text = worktype.WorkName;
+            }*/
         }
     }
 }

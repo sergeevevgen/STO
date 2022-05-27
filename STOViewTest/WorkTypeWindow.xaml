@@ -15,7 +15,9 @@
             <Label Content="Название:"  Margin="0,0,0,0" Height="35"/>
             <TextBox x:Name="TextBoxName"/>
             <Label Content="Привязанные запчасти:" />
-            <ListBox x:Name="ListBoxSeminarsL" DisplayMemberPath="Value" SelectedValuePath="Key" SelectionMode="Single" HorizontalAlignment="Center" Height="140" Width="300" VerticalAlignment="Top"/>
+            <ComboBox x:Name="ComboBoxSparePartsWT" DisplayMemberPath="SparePartName" SelectedValuePath="Id" Width="300" SelectedItem="null"/>
+            <Label Content="Время работ:" />
+            <ComboBox x:Name="ComboBoxTimeOfWork" DisplayMemberPath="Hours" SelectedValuePath="Id" Width="300" SelectedItem="null"/>
         </StackPanel>
         <Button x:Name="ButtonSave" Content="Сохранить" HorizontalAlignment="Left" Margin="80,239,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="100" Click="ButtonSave_Click"/>
         <Button x:Name="ButtonCancel" Content="Отмена" HorizontalAlignment="Left" Margin="280,239,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="100" Click="ButtonCancel_Click" RenderTransformOrigin="0.497,-3.203"/>

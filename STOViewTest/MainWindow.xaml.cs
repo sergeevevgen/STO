@@ -46,8 +46,8 @@ namespace STOViewTest
 
         private void MenuItemRoomers_Click(object sender, RoutedEventArgs e)
         {
-           /* var form = App.Container.Resolve<RoomersWindow>();
-            form.ShowDialog();*/
+            var form = App.Container.Resolve<WorkTimeWindow>();
+            form.ShowDialog();
         }
 
         private void MenuAddWorkType_Click(object sender, RoutedEventArgs e)
