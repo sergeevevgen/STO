@@ -22,6 +22,10 @@ namespace STOEmployeeApp.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+            public IActionResult TO()
+        {
             if (Program.Employee == null)
             {
                 return Redirect("~/Home/Enter");
@@ -126,6 +130,10 @@ namespace STOEmployeeApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            if (Program.Employee == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
             ViewBag.Cars = APIClient.GetRequest<List<CarViewModel>>("api/main/getcarlist");
             ViewBag.Works = new MultiSelectList(APIClient.GetRequest<List<WorkTypeViewModel>>("api/main/getworktypelist"), "Id", "WorkName", "Hours");
             return View();
@@ -155,6 +163,10 @@ namespace STOEmployeeApp.Controllers
         [HttpGet]
         public IActionResult Update(TOViewModel model)
         {
+            if (Program.Employee == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
             return View(model);
         }
 
@@ -178,6 +190,10 @@ namespace STOEmployeeApp.Controllers
 
         public IActionResult Cars()
         {
+            if (Program.Employee == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
             return View(APIClient.GetRequest<List<CarViewModel>>("api/main/getcarlist"));
         }
 
