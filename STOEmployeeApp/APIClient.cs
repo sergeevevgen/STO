@@ -4,6 +4,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+
 namespace STOEmployeeApp
 {
     public static class APIClient
@@ -29,6 +30,7 @@ namespace STOEmployeeApp
                 throw new Exception(result);
             }
         }
+
         public static void PostRequest<T>(string requestUrl, T model)
         {
             var json = JsonConvert.SerializeObject(model);

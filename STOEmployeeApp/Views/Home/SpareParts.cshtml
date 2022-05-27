@@ -1,0 +1,60 @@
+﻿@using STOContracts.ViewModels
+@model List<SparePartViewModel>
+@{
+    ViewData["Title"] = "SpareParts";
+}
+<div class="text-center">
+    <h2 class="display-4">Запчасти</h2>
+</div>
+<div class="text-center">
+    @{
+    <p>
+        <a asp-action="CreateSparePart">Добавить запчасть</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Наименование
+                </th>
+                <th>
+                    Заводской номер
+                </th>
+                <th>
+                    Стоимость
+                </th>
+                <th>
+                    Статус
+                </th>
+                <th>
+                    Единица измерения
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SparePartName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem =>
+                        item.FactoryNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem =>
+                        item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UMeasurement)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+</div>

@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "CreateWork";
+}
+<div class="text-center">
+    <h2 class="display-4">Работа</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Виды работ:</div>
+        <div class="col-8">
+            <select id="worktypeId" name="worktypeId" class="form-control" asp-items="@(new SelectList(@ViewBag.WorkTypes,"Id", "WorkName"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Продолжительность:</div>
+        <div class="col-8">
+            <select id="timeid" name="timeid" class="form-control" asp-items="@(new SelectList(@ViewBag.Times,"Id", "Hours"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Стоимость:</div>
+        <div class="col-8">
+            <input type="text" name="price" id="price"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4"><input type="submit" value="Добавить" class="btn btnprimary" /></div>
+        <a type="button" asp-action="Works" class="btn btn-primary">Отмена</a>
+    </div>
+</form>

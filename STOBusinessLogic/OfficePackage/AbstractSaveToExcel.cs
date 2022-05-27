@@ -10,7 +10,7 @@ namespace STOBusinessLogic.OfficePackage
 {
     public abstract class AbstractSaveToExcel
     {
-        public void CreateReportManager(ExcelInfo info)
+        /*public void CreateReportManager(ExcelInfo info)
         {
             CreateExcel(info);
             InsertCellInWorksheet(new ExcelCellParameters
@@ -119,6 +119,6 @@ namespace STOBusinessLogic.OfficePackage
         /// Сохранение файла
         /// </summary>
         /// <param name="info"></param>
-        protected abstract void SaveExcel(ExcelInfo info);
+        protected abstract void SaveExcel(ExcelInfo info);*/
     }
 }

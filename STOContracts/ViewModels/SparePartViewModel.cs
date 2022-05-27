@@ -25,7 +25,5 @@ namespace STOContracts.ViewModels
 
         [DisplayName("Единица измерения")]
         public string UMeasurement { get; set; }
-
-        public Dictionary<int, string> SpareParts { get; set; }
     }
 }

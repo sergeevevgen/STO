@@ -11,8 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BoldReports.Windows;
 using Unity;
+using STOContracts.BusinessLogicsContracts;
 
 namespace STOView
 {
@@ -21,7 +21,7 @@ namespace STOView
     /// </summary>
     public partial class ReportWindow : Window
     {
-        private readonly IReportLogic _logicR;
+        /*private readonly IReportLogic _logicR;
 
         public ReportWindow(IReportLogic logicR)
         {
@@ -96,6 +96,6 @@ namespace STOView
             form.DateFrom = datePickerStart.SelectedDate.Value;
             form.DateTo = datePickerEnd.SelectedDate.Value;
             form.ShowDialog();
-        }
+        }*/
     }
 }

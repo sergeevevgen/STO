@@ -7,12 +7,13 @@
         mc:Ignorable="d"
         Title="Отчёт" Height="600" Width="800">
     <Grid>
-        <BoldReports:ReportViewer Name ="ReportViewer" Margin="0,100,0,0"></BoldReports:ReportViewer>
+
+        <!--BoldReports:ReportViewer Name ="ReportViewer" Margin="0,100,0,0"></BoldReports:ReportViewer>-->
         <Label Content="С" HorizontalAlignment="Left" Margin="77,37,0,0" VerticalAlignment="Top"/>
         <Label Content="по" HorizontalAlignment="Left" Margin="285,37,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="datePickerStart" HorizontalAlignment="Left" Margin="100,38,0,0" VerticalAlignment="Top" Width="180"/>
         <DatePicker x:Name="datePickerEnd" HorizontalAlignment="Left" Margin="314,38,0,0" VerticalAlignment="Top" Width="180"/>
-        <Button x:Name="buttonMake" Content="Показать" HorizontalAlignment="Left" Margin="530,37,0,0" VerticalAlignment="Top" Width="80" Height="27" Click="buttonMake_Click"/>
-        <Button x:Name="buttonSendMail" Content="На почту" HorizontalAlignment="Left" Margin="635,38,0,0" VerticalAlignment="Top" Width="80" Height="27" Click="buttonSendMail_Click"/>
+        <!--<Button x:Name="buttonMake" Content="Показать" HorizontalAlignment="Left" Margin="530,37,0,0" VerticalAlignment="Top" Width="80" Height="27" Click="buttonMake_Click"/>
+        <Button x:Name="buttonSendMail" Content="На почту" HorizontalAlignment="Left" Margin="635,38,0,0" VerticalAlignment="Top" Width="80" Height="27" Click="buttonSendMail_Click"/>-->
     </Grid>
 </Window>

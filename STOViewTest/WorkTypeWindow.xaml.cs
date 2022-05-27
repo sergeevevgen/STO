@@ -96,15 +96,15 @@ namespace STOView
                 {
                     Id = id
                 })[0];
-                var listSpareParts = sparepart.SpareParts.ToList();
-                foreach (var sppart in listSpareParts)
-                {
-                    SparePartViewModel current = _sparePartLogic.Read(new SparePartBindingModel
-                    {
-                        Id = sppart.Key
-                    })[0];
-                    SparePartsListBox.Items.Add(sppart);
-                }
+                //var listSpareParts = sparepart.SpareParts.ToList();
+                //foreach (var sppart in listSpareParts)
+                //{
+                //    SparePartViewModel current = _sparePartLogic.Read(new SparePartBindingModel
+                //    {
+                //        Id = sppart.Key
+                //    })[0];
+                //    SparePartsListBox.Items.Add(sppart);
+                //}
 
                 TextBoxName.Text = sparepart.SparePartName;
             }

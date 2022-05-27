@@ -1,0 +1,47 @@
+﻿@using STOContracts.ViewModels
+@model List<WorkTypeViewModel>
+@{
+    ViewData["Title"] = "WorkTypes";
+}
+<div class="text-center">
+    <h2 class="display-4">Виды работ</h2>
+</div>
+<div class="text-center">
+    @{
+    <p>
+        <a asp-action="CreateWorkType">Добавить вид работ</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Наименование
+                </th>
+                <th>
+                    Продолжительность
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem =>
+                        item.Hours)
+                    </td>
+                    <td>
+                        <a asp-action="UpdateWorkType" asp-route-Id="@item.Id">Изменить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        <a asp-action="Works">Работы</a>
+    </p>
+    }
+</div>

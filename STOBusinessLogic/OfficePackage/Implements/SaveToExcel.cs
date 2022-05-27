@@ -10,7 +10,7 @@ namespace STOBusinessLogic.OfficePackage.Implements
 {
     public class SaveToExcel : AbstractSaveToExcel
     {
-        private SpreadsheetDocument _spreadsheetDocument;
+        /*private SpreadsheetDocument _spreadsheetDocument;
         private SharedStringTablePart _shareStringPart;
         private Worksheet _worksheet;
         /// <summary>
@@ -297,6 +297,6 @@ namespace STOBusinessLogic.OfficePackage.Implements
         {
             _spreadsheetDocument.WorkbookPart.Workbook.Save();
             _spreadsheetDocument.Close();
-        }
+        }*/
     }
 }

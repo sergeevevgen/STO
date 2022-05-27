@@ -9,7 +9,7 @@ namespace STOBusinessLogic.OfficePackage.Implements
 {
     public class SaveToWord : AbstractSaveToWord
     {
-        private WordprocessingDocument _wordDocument;
+        /*private WordprocessingDocument _wordDocument;
         private Body _docBody;
         /// <summary>
         /// Получение типа выравнивания
@@ -112,6 +112,6 @@ namespace STOBusinessLogic.OfficePackage.Implements
             _docBody.AppendChild(CreateSectionProperties());
             _wordDocument.MainDocumentPart.Document.Save();
             _wordDocument.Close();
-        }
+        }*/
     }
 }

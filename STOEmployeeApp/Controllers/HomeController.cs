@@ -24,15 +24,6 @@ namespace STOEmployeeApp.Controllers
         {
             return View();
         }
-            public IActionResult TO()
-        {
-            if (Program.Employee == null)
-            {
-                return Redirect("~/Home/Enter");
-            }
-            return
-            View(APIClient.GetRequest<List<TOViewModel>>($"api/main/gettos?employeeId={Program.Employee.Id}"));
-        }
 
         [HttpGet]
         public IActionResult Privacy()
@@ -127,64 +118,79 @@ namespace STOEmployeeApp.Controllers
             throw new Exception("Введите логин, пароль и ФИО");
         }
 
-        [HttpGet]
-        public IActionResult Create()
+        public IActionResult TO()
         {
             if (Program.Employee == null)
             {
                 return Redirect("~/Home/Enter");
             }
+            return View(APIClient.GetRequest<List<TOViewModel>>($"api/main/gettos?employeeId={Program.Employee.Id}"));
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
             ViewBag.Cars = APIClient.GetRequest<List<CarViewModel>>("api/main/getcarlist");
             ViewBag.Works = new MultiSelectList(APIClient.GetRequest<List<WorkTypeViewModel>>("api/main/getworktypelist"), "Id", "WorkName", "Hours");
             return View();
         }
 
         [HttpPost]
-        public void Create(int carId, int workId, int count)
+        public void Create(int carId,  List<int> workId)
         {
-            if (carId == 0 || workId == 0 || count == 0)
+            var listworks = new List<WorkTypeViewModel>();
+            foreach(var work in workId)
             {
-                Response.Redirect("Index");
+                listworks.Add(APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={workId}"));
             }
-            var worktype = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={workId}");
-            var dict = new Dictionary<int, (string, int)>();
-            dict.Add(worktype.Id, (worktype.WorkName, count));
-            APIClient.PostRequest("api/main/createto",
-            new CreateTOBindingModel
+            if (!(carId == 0) || listworks !=  null)
             {
-                EmployeeId = Program.Employee.Id,
-                CarId = carId,
-                TOWorks = dict
-             });
-            Response.Redirect("Index");
+                APIClient.PostRequest("api/main/createto",
+                new CreateTOBindingModel
+                {
+                    EmployeeId = Program.Employee.Id,
+                    CarId = carId,
+                    TOWorks = listworks.ToDictionary(rec => rec.Id, rec => (rec.WorkName, 1))
+                });
+                Response.Redirect("TO");
+            }
+            
+            Response.Redirect("TO");
             return;
         }
 
         [HttpGet]
-        public IActionResult Update(TOViewModel model)
+        public IActionResult Update(int toId)
         {
-            if (Program.Employee == null)
-            {
-                return Redirect("~/Home/Enter");
-            }
-            return View(model);
+            ViewBag.Works = APIClient.GetRequest<List<WorkTypeViewModel>>($"api/main/getworktypelist");
+            ViewBag.TO = APIClient.GetRequest<TOViewModel>($"api/main/getto?toId={toId}");
+            return View();
         }
 
         [HttpPost]
-        public void Update(int workId, int toId, int count, decimal sum)
+        public void Update(int toId, List<int> workId, int carId)
         {
-            var worktype = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={workId}");
-            var newmodel = APIClient.GetRequest<TOViewModel>($"api/main/getto?toid={toId}");
-            newmodel.TOWorks.Add(workId, (worktype.WorkName, count));
-            APIClient.PostRequest("api/main/updateto", new TOBindingModel
+            var listworks = new List<WorkTypeViewModel>();
+            var car = APIClient.GetRequest<CarViewModel>($"api/main/getcar?carId={carId}");
+            foreach (var work in workId)
             {
-                Id = newmodel.Id,
-                CarId = newmodel.CarId,
-                Sum = sum,
-                TOWorks = newmodel.TOWorks
-            });
+                listworks.Add(APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={workId}"));
+            }
 
-            Response.Redirect("Index");
+            if (car == null || listworks != null)
+            {
+                APIClient.PostRequest("api/main/updateto",
+                new TOBindingModel
+                {
+                    Id = toId,
+                    EmployeeId = Program.Employee.Id,
+                    CarId = carId,
+                    TOWorks = listworks.ToDictionary(rec => rec.Id, rec => (rec.WorkName, 1))
+                });
+                Response.Redirect("TO");
+            }
+
+            Response.Redirect("TO");
             return;
         }
 
@@ -233,13 +239,225 @@ namespace STOEmployeeApp.Controllers
             throw new Exception("Введите марку, модель, VIN и номер телефона владельца");
         }
 
-        [HttpPost]
-        public decimal Calc(int count, int workId)
+        [HttpGet]
+        public IActionResult Works()
         {
-            var price =
-            APIClient.GetRequest<decimal>($"api/main/getwork?workId={workId}");
-            return count * price;
+            if (Program.Employee == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIClient.GetRequest<List<WorkViewModel>>("api/main/getworklist"));
         }
+
+        [HttpGet]
+        public IActionResult CreateWork()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public void CreateWork(int workId, decimal price)
+        {
+            var work = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={workId}");
+            if (work != null)
+            {
+                APIClient.PostRequest("api/main/creatework",
+                new CreateWorkBindingModel
+                {
+                    StoreKeeperId = 1,
+                    Count = 1,
+                    Price = price,
+                    NetPrice = price * 13,
+                    WorkName = work.WorkName,
+                    WorkTypeId = workId
+                });
+                Response.Redirect("Works");
+            }
+
+            Response.Redirect("Works");
+            return;
+        }
+
+        [HttpPost]
+        public void UpdateWork(int workId, decimal price)
+        {
+            var work = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={workId}");
+            if (work != null)
+            {
+                APIClient.PostRequest("api/main/creatework",
+                new CreateWorkBindingModel
+                {
+                    StoreKeeperId = 1,
+                    Count = 1,
+                    Price = price,
+                    NetPrice = price * 13,
+                    WorkName = work.WorkName,
+                    WorkTypeId = workId
+                });
+                Response.Redirect("Works");
+            }
+
+            Response.Redirect("Works");
+            return;
+        }
+
+        [HttpGet]
+        public IActionResult WorkTypes()
+        {
+            return View(APIClient.GetRequest<List<WorkTypeViewModel>>("api/main/getworktypelist"));
+        }
+
+        [HttpGet]
+        public IActionResult CreateWorkType()
+        {
+            ViewBag.Times = APIClient.GetRequest<List<TimeOfWorkViewModel>>($"api/main/gettimelist");
+            return View();
+        }
+
+        [HttpPost]
+        public void CreateWorkType(int timeId, string workName)
+        {
+            var time = APIClient.GetRequest<WorkTypeViewModel>($"api/main/gettime?timeId={timeId}");
+            if (time != null)
+            {
+                APIClient.PostRequest("api/main/createworktype",
+                new WorkTypeBindingModel
+                {
+                    WorkName = workName,
+                    TimeOfWorkId = timeId                    
+                });
+                Response.Redirect("Works");
+            }
+
+            Response.Redirect("Works");
+            return;
+        }
+
+        [HttpGet]
+        public IActionResult UpdateWorkType(int worktypeId)
+        {
+            ViewBag.WorkType = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?worktypeId={worktypeId}");
+            return View();
+        }
+
+        [HttpPost]
+        public void UpdateWorkType(int worktypeId, int timeId, string workName)
+        {
+            var time = APIClient.GetRequest<WorkTypeViewModel>($"api/main/gettime?timeId={timeId}");
+            if (time != null)
+            {
+                APIClient.PostRequest("api/main/createworktype",
+                new WorkTypeBindingModel
+                {
+                    Id = worktypeId,
+                    WorkName = workName,
+                    TimeOfWorkId = timeId
+                });
+                Response.Redirect("Works");
+            }
+
+            Response.Redirect("Works");
+            return;
+        }
+
+        [HttpGet]
+        public IActionResult SpareParts()
+        {
+            if (Program.Employee == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIClient.GetRequest<List<SparePartViewModel>>($"api/main/getpartlist"));
+        }
+
+        [HttpGet]
+        public IActionResult CreateSparePart()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public void CreateSparePart(string partName, string factoryNum, decimal price, string status, string um)
+        {
+            if (!string.IsNullOrEmpty(partName) && !string.IsNullOrEmpty(factoryNum) && price != 0 && !string.IsNullOrEmpty(status) && !string.IsNullOrEmpty(um))
+            {
+                APIClient.PostRequest("api/main/createpart",
+                new SparePartBindingModel
+                {
+                    SparePartName = partName,
+                    FactoryNumber = factoryNum,
+                    Price = price,
+                    Status = STOContracts.Enums.SparePartStatus.БУ,
+                    UMeasurement = STOContracts.Enums.UnitMeasurement.шт
+                });
+                Response.Redirect("SpareParts");
+            }
+
+            Response.Redirect("SpareParts");
+            return;
+        }
+
+        [HttpGet]
+        public IActionResult UpdateSparePart(int partId)
+        {
+            ViewBag.Part = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getpart?partId={partId}");
+            return View();
+        }
+
+        [HttpPost]
+        public void UpdateSparePart(int partId, string partName, string factoryNum, decimal price, string status, string um)
+        {
+            if (!string.IsNullOrEmpty(partName) && !string.IsNullOrEmpty(factoryNum) && price != 0 && !string.IsNullOrEmpty(status) && !string.IsNullOrEmpty(um))
+            {
+                var part = APIClient.GetRequest<SparePartViewModel>($"api/main/getpart?partId={partId}");
+                if (part == null)
+                {
+                    return;
+                }
+                APIClient.PostRequest("api/main/createpart",
+                new SparePartBindingModel
+                {
+                    Id = partId,
+                    SparePartName = partName,
+                    FactoryNumber = factoryNum,
+                    Price = price,
+                    Status = STOContracts.Enums.SparePartStatus.БУ,
+                    UMeasurement = STOContracts.Enums.UnitMeasurement.шт
+                });
+                Response.Redirect("SpareParts");
+            }
+
+            Response.Redirect("SpareParts");
+            return;
+        }
+
+        [HttpGet]
+        public IActionResult Time()
+        {
+            if (Program.Employee == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public void Time(int hours)
+        {
+            if (hours > 0)
+            {
+                APIClient.PostRequest("api/main/createtime",
+                new TimeOfWorkBindingModel
+                {
+                    Hours = hours
+                });
+                Response.Redirect("Time");
+            }
+
+            Response.Redirect("Time");
+            return;
+        }
+
 
         //[HttpGet]
         //public IActionResult Messages()

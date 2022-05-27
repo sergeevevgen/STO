@@ -8,7 +8,7 @@ namespace STOBusinessLogic.OfficePackage.Implements
 {
     public class SaveToPdf : AbstractSaveToPdf
     {
-        private Document _document;
+        /*private Document _document;
         private Section _section;
         private Table _table;
         private static ParagraphAlignment GetParagraphAlignment(PdfParagraphAlignmentType type)
@@ -80,6 +80,6 @@ namespace STOBusinessLogic.OfficePackage.Implements
             };
             renderer.RenderDocument();
             renderer.PdfDocument.Save(info.FileName);
-        }
+        }*/
     }
 }

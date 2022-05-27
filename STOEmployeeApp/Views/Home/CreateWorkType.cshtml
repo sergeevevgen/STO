@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "CreateWorkType";
+}
+<div class="text-center">
+    <h2 class="display-4">Добавление работы</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Наименование:</div>
+        <div class="col-8">
+            <input type="text" name="workName" id="workName"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Продолжительность:</div>
+        <div class="col-8">
+            <select id="timeid" name="timeid" class="form-control" asp-items="@(new SelectList(@ViewBag.Times,"Id", "Hours"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4"><input type="submit" value="Добавить" class="btn btnprimary" /></div>
+    </div>
+</form>

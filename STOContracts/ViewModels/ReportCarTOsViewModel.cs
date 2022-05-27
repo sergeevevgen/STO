@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace STOContracts.ViewModels
 {
-    //Модель для получения списка валют по выбранным клиентам (роль Работник)
+    //Модель для получения списка то по выбранному авто (роль Работник)
     public class ReportCarTOsViewModel
     {
         public string Car { get; set; }

@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "UpdateSparePart";
+}
+<div class="text-center">
+    <h2 class="display-4">Изменение запчасти</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Наименование:</div>
+        <div class="col-8">
+            <input type="text" name="name" id="name"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Заводской номер:</div>
+        <div class="col-8">
+            <input type="text" name="factoryNumber" id="factoryNumber"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Стоимость:</div>
+        <div class="col-8">
+            <input type="text" name="price" id="price"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Статус:</div>
+        <div class="col-8">
+            <select id="status" name="status" class="form-control" asp-items="@(new SelectList(@ViewBag.Statuses,"Id", "Name"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Единица измерения:</div>
+        <div class="col-8">
+            <select id="um" name="um" class="form-control" asp-items="@(new SelectList(@ViewBag.UMs,"Id", "Name"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4"><input type="submit" value="Добавить" class="btn btnprimary" /></div>
+        <a type="button" asp-action="SpareParts" class="btn btn-primary">Отмена</a>
+    </div>
+</form>

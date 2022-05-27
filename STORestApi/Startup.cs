@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using STOContracts.BindingModels;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 namespace STORestApi
 {
@@ -30,6 +31,9 @@ namespace STORestApi
             services.AddTransient<IServiceRecordStorage, ServiceRecordStorage>();
             services.AddTransient<IWorkStorage, WorkStorage>();
             services.AddTransient<IWorkTypeStorage, WorkTypeStorage>();
+            services.AddTransient<ISparePartStorage, SparePartStorage>();
+            services.AddTransient<ITimeOfWorkStorage, TimeOfWorkStorage>();
+            services.AddTransient<IStoreKeeperStorage, StoreKeeperStorage>();
             //services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
 
             services.AddTransient<IEmployeeLogic, EmployeeLogic>();
@@ -37,10 +41,12 @@ namespace STORestApi
             services.AddTransient<ICarLogic, CarLogic>();
             services.AddTransient<IServiceRecordLogic, ServiceRecordLogic>();
             services.AddTransient<IWorkLogic, WorkLogic>();
+            services.AddTransient<ISparePartLogic, SparePartLogic>();
+            services.AddTransient<ITimeOfWorkLogic, TimeOfWorkLogic>();
+            services.AddTransient<IStoreKeeperLogic, StoreKeeperLogic>();
             //services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
             //services.AddSingleton<AbstractMailWorker, MailKitWorker>();
-
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo

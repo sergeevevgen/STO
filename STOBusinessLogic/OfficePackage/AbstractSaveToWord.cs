@@ -10,7 +10,7 @@ namespace STOBusinessLogic.OfficePackage
 {
     public abstract class AbstractSaveToWord
     {
-        public void CreateDocManager(WordInfo info)
+        /*public void CreateDocManager(WordInfo info)
         {
 
             CreateWord(info);
@@ -104,6 +104,6 @@ namespace STOBusinessLogic.OfficePackage
         /// Сохранение файла
         /// </summary>
         /// <param name="info"></param>
-        protected abstract void SaveWord(WordInfo info);
+        protected abstract void SaveWord(WordInfo info);*/
     }
 }
