@@ -25,14 +25,16 @@ namespace STOView
     {
         private readonly IWorkLogic _logic;
         private readonly ISparePartLogic _sparePartLogic;
+        private readonly ITimeOfWorkLogic _timeOfWorkLogic;
         public int Id { set { id = value; } }
         private int? id;
 
-        public WorkTypeWindow(IWorkLogic logic, ISparePartLogic sparePartLogic)
+        public WorkTypeWindow(IWorkLogic logic, ISparePartLogic sparePartLogic, ITimeOfWorkLogic timeOfWorkLogic)
         {
             InitializeComponent();
             _logic = logic;
             _sparePartLogic = sparePartLogic;
+            _timeOfWorkLogic = timeOfWorkLogic;
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -68,6 +70,10 @@ namespace STOView
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            ComboBoxTimeOfWork.ItemsSource = _timeOfWorkLogic.Read(new TimeOfWorkBindingModel
+            {
+                Id = id
+            });
             if (id != null)
             {
                 var worktype = _logic.Read(new WorkBindingModel
