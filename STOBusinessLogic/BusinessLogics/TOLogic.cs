@@ -43,12 +43,18 @@ namespace STOBusinessLogic.BusinessLogics
                 DateImplement = tO.DateImplement,
                 DateOver = tO.DateOver
             });
+            string list = "";
+            foreach(var work in tO.TOWorks)
+            {
+                list += work.Value.Item1 + "\n";
+                list += work.Value.Item2 + "\n";
+            }
             _serviceRecordLogic.CreateOrUpdate(new ServiceRecordBindingModel 
             {
                 CarId = tO.CarId,
                 DateBegin = tO.DateCreate,
                 DateEnd = tO.DateOver,
-                Description = tO.TOWorks.ToString()
+                Description = list
             });
         }
 

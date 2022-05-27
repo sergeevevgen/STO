@@ -128,6 +128,7 @@ namespace STODatabaseImplement.Implements
             work.Price = model.Price;
             work.StoreKeeperId = model.StoreKeeperId.Value;
             work.WorkStatus = model.WorkStatus;
+            work.TOWorks.Add(new TOWork { WorkId = model.Id.Value });
             return work;
         }
 
@@ -146,7 +147,8 @@ namespace STODatabaseImplement.Implements
                 WorkStatus = work.WorkStatus.ToString(),
                 WorkSpareParts = work.WorkType.WorkSpareParts
                 .ToDictionary(recPC => recPC.WorkTypeId,
-                recPC => (recPC.SparePart?.SparePartName, recPC.Count))
+                recPC => (recPC.SparePart?.SparePartName, recPC.Count)),
+
             };
         }
     }

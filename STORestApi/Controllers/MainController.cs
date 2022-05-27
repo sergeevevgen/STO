@@ -27,7 +27,7 @@ namespace STORestApi.Controllers
 
         [HttpGet]
         public List<CarViewModel> GetCarList() => _car
-            .Read(null)?.ToList();
+            .Read(null);
 
         [HttpGet]
         public CarViewModel GetCar(int carId) => _car

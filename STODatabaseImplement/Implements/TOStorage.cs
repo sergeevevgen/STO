@@ -130,6 +130,7 @@ namespace STODatabaseImplement.Implements
             tO.DateCreate = model.DateCreate;
             tO.DateImplement = model.DateImplement;
             tO.DateOver = model.DateOver;
+            tO.Sum = 13 * 120;
             if (model.Id.HasValue)
             {
                 var tOWorks = context.TOWorks

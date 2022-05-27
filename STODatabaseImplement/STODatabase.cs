@@ -19,7 +19,7 @@ namespace STODatabaseImplement
             }
             base.OnConfiguring(optionsBuilder);
         }
-
+        
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<StoreKeeper> StoreKeepers { get; set; }
         public virtual DbSet<Car> Cars { get; set; }

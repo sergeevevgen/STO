@@ -136,13 +136,26 @@ namespace STOEmployeeApp.Controllers
         }
 
         [HttpPost]
-        public void Create(int carId,  List<int> workId)
+        public void Create(int carId,  List<int> workId, int count)
         {
             var listworks = new List<WorkTypeViewModel>();
+            var list2 = new List<WorkViewModel>();
             foreach(var work in workId)
             {
-                listworks.Add(APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={work}"));
+                var workget = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={work}");
+                listworks.Add(workget);
+                APIClient.PostRequest("api/main/creatework", new WorkBindingModel
+                {
+                    WorkName = workget.WorkName,
+                    StoreKeeperId = 1,
+                    WorkSpareParts = workget.WorkSpareParts,
+                    WorkTypeId = workget.Id,
+                    WorkStatus = STOContracts.Enums.WorkStatus.Принят,
+                    NetPrice = 153 * 76,
+                    Price = 12 * 46
+                });
             }
+
             if (!(carId == 0) || listworks !=  null)
             {
                 APIClient.PostRequest("api/main/createto",
@@ -150,7 +163,8 @@ namespace STOEmployeeApp.Controllers
                 {
                     EmployeeId = Program.Employee.Id,
                     CarId = carId,
-                    TOWorks = listworks.ToDictionary(rec => rec.Id, rec => (rec.WorkName, 1))
+                    TOWorks = listworks.ToDictionary(rec => rec.Id, rec => (rec.WorkName, count)),
+                    Sum = listworks.Count * 134
                 });
                 Response.Redirect("TO");
             }
@@ -168,7 +182,7 @@ namespace STOEmployeeApp.Controllers
         }
 
         [HttpPost]
-        public void Update(int toId, List<int> workId, int carId)
+        public void Update(int toId, List<int> workId, int carId, int count)
         {
             var listworks = new List<WorkTypeViewModel>();
             var car = APIClient.GetRequest<CarViewModel>($"api/main/getcar?carId={carId}");
@@ -185,7 +199,7 @@ namespace STOEmployeeApp.Controllers
                     Id = toId,
                     EmployeeId = Program.Employee.Id,
                     CarId = carId,
-                    TOWorks = listworks.ToDictionary(rec => rec.Id, rec => (rec.WorkName, 1))
+                    TOWorks = listworks.ToDictionary(rec => rec.Id, rec => (rec.WorkName, count))
                 });
                 Response.Redirect("TO");
             }
@@ -240,6 +254,38 @@ namespace STOEmployeeApp.Controllers
         }
 
         [HttpGet]
+        public IActionResult UpdateCar(int carId)
+        {
+            ViewBag.Car = APIClient.GetRequest<CarViewModel>($"api/main/getcar?carId={carId}");
+            return View();
+        }
+
+        [HttpPost]
+        public void UpdateCar(int carId, string carBrand, string carModel, string VIN, string ownerPhoneNumber)
+        {
+            if(!string.IsNullOrEmpty(carBrand) && !string.IsNullOrEmpty(carModel) && !string.IsNullOrEmpty(VIN))
+            {
+                var car = APIClient.GetRequest<CarViewModel>($"api/main/getcar?carId={carId}");
+                if (car == null)
+                {
+                    return;
+                }
+                APIClient.PostRequest("api/main/addcar", new CarBindingModel
+                {
+                    Id = carId,
+                    CarBrand = carBrand,
+                    CarModel = carModel,
+                    VIN = VIN,
+                    OwnerPhoneNumber = ownerPhoneNumber,
+                    CarRecords = car.CarRecords
+                });
+                Response.Redirect("Cars");
+                return;
+            }
+            throw new Exception("Введите марку, модель, VIN, стоимость, номер телефона");
+        }
+
+        [HttpGet]
         public IActionResult Works()
         {
             if (Program.Employee == null)
@@ -268,6 +314,7 @@ namespace STOEmployeeApp.Controllers
                 {
                     StoreKeeperId = 1,
                     Count = 1,
+                    
                     Price = price,
                     NetPrice = price * 13,
                     WorkName = work.WorkName,

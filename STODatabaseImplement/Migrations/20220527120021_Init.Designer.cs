@@ -12,7 +12,7 @@ using STODatabaseImplement;
 namespace STODatabaseImplement.Migrations
 {
     [DbContext(typeof(STODatabase))]
-    [Migration("20220526225620_Init")]
+    [Migration("20220527120021_Init")]
     partial class Init
     {
         /// <inheritdoc />

@@ -58,7 +58,11 @@
                         @Html.DisplayFor(modelItem => item.OwnerPhoneNumber)
                     </td>
                     <td>
-                        <a asp-action="Records" asp-route-Id="@item.Id">Посмотреть записи</a>
+                        <a asp-action="Records" asp-route-carId="@item.Id">Посмотреть записи</a>
+                    </td>
+                    <td>
+                        <a asp-action="UpdateCar" asp-route-carId="@item.Id" asp-route-carBrand="@item.CarBrand" asp-route-carModel="@item.CarModel"
+                        asp-route-ownerPhoneNumber="@item.OwnerPhoneNumber">Изменить</a>
                     </td>
                 </tr>
             }
