@@ -15,7 +15,6 @@ namespace STOBusinessLogic.BusinessLogics
     {
         private readonly IWorkStorage _workStorage;
         private readonly IWorkTypeStorage _workTypeStorage;
-
         public WorkLogic(IWorkStorage workStorage, IWorkTypeStorage workTypeStorage)
         {
             _workStorage = workStorage;
@@ -52,7 +51,6 @@ namespace STOBusinessLogic.BusinessLogics
                 WorkName = model.WorkName,
                 WorkTypeId = model.WorkTypeId,
                 Price = model.Price,
-                NetPrice = model.NetPrice,
                 StoreKeeperId = model.StoreKeeperId,
                 WorkStatus = WorkStatus.Принят,
                 WorkSpareParts = _workTypeStorage.GetElement(new WorkTypeBindingModel { Id = model.WorkTypeId }).WorkSpareParts

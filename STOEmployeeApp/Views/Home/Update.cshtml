@@ -1,0 +1,39 @@
+﻿@using STOContracts.ViewModels
+@model TOViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+<div class="text-center">
+    <h2 class="display-4">Изменение ТО</h2>
+</div>
+<div class="text-center">
+    @{
+        if (Model == null)
+        {
+            <h3 class="display-4">Авторизируйтесь</h3>
+            return;
+        }
+        <form method="post">
+            <div class="row">
+                <div class="col-4">Работы:</div>
+                <div class="col-8">
+                    <select id="workId" name="workId" class="form-control" asp-items="@(new SelectList(@ViewBag.Works,"Id", "WorkName"))"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-8">
+                    <input type="text" name="toId" id="toId"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">Количество:</div>
+                <div class="col-8"><input type="text" name="count" id="count" /></div>
+            </div>
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col-4"><input type="submit" value="Изменить" class="btn btnprimary" /></div>
+            </div>
+        </form>
+    }
+</div>

@@ -37,7 +37,23 @@ namespace STORestApi.Controllers
         public List<WorkTypeViewModel> GetWorkTypeList() => _work.ReadType(null)?.ToList();
 
         [HttpGet]
+        public WorkTypeViewModel GetWorkType(int workid) => _work.ReadType(new WorkTypeBindingModel {Id = workid })?[0];
+
+        [HttpGet]
+        public decimal GetWork(int workId)
+        {
+            var work = _work.Read(new WorkBindingModel { Id = workId })?[0];
+            return work.NetPrice;
+        }
+
+        [HttpGet]
         public List<ServiceRecordViewModel> GetRecords(int carId) => _service.Read(new ServiceRecordBindingModel { CarId = carId });
+
+        [HttpGet]
+        public TOViewModel getto(int toid) => _tO.Read(new TOBindingModel { Id = toid })?[0];
+
+        [HttpPost]
+        public void UpdateTO(TOBindingModel model) => _tO.Update(model);
 
         [HttpPost]
         public void CreateTO(CreateTOBindingModel model) => _tO

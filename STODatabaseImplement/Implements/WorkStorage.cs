@@ -123,7 +123,7 @@ namespace STODatabaseImplement.Implements
         private static Work CreateModel(WorkBindingModel model, Work work)
         {
             work.WorkName = model.WorkName;
-            work.NetPrice = model.NetPrice;
+            work.NetPrice = work.WorkType.WorkSpareParts.Sum(x => x.Count * x.SparePart.Price);
             work.WorkTypeId = model.WorkTypeId.Value;
             work.Price = model.Price;
             work.StoreKeeperId = model.StoreKeeperId.Value;

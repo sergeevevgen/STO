@@ -8,13 +8,13 @@
     <div class="row">
         <div class="col-4">Работы:</div>
         <div class="col-8">
-            <select id="work" name="work" class="form-control" asp-items="@(new MultiSelectList(@ViewBag.Works,"Id", "WorkName"))"></select>
+            <select id="workId" name="workId" class="form-control" asp-items="@(new SelectList(@ViewBag.Works,"Id", "WorkName"))"></select>
         </div>
     </div>
     <div class="row">
-        <div class="col-4">Работы:</div>
+        <div class="col-4">Автомобили:</div>
         <div class="col-8">
-            <select id="car" name="car" class="form-control" asp-items="@(new SelectList(@ViewBag.Cars, "Id", "CarBrand", "CarModel", "VIN"))"></select>
+            <select id="carId" name="carId" class="form-control" asp-items="@(new SelectList(@ViewBag.Cars, "Id", "VIN"))"></select>
         </div>
     </div>
     <div class="row">
@@ -22,36 +22,7 @@
         <div class="col-8"><input type="text" name="count" id="count" /></div>
     </div>
     <div class="row">
-        <div class="col-4">Сумма:</div>
-        <div class="col-8"><input type="text" id="sum" name="sum" readonly/>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-8"></div>
         <div class="col-4"><input type="submit" value="Создать" class="btn btnprimary" /></div>
     </div>
 </form>
-
-<script>
-    $('#work').on('change', function () {
-        check();
-    });
-    $('#count').on('change', function () {
-    check();
-    });
-
-    function check() {
-        var count = $('#count').val();
-        var work = $('#work').val();
-        if (count && work) {
-            $.ajax({
-                method: "POST",
-                url: "/Home/Calc",
-                data: { count: count, work: work },
-                success: function (result) {
-                            $("#sum").val(result);
-                         }
-            });
-        };
-    }
-</script>

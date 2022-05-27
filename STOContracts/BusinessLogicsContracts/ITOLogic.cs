@@ -13,6 +13,7 @@ namespace STOContracts.BusinessLogicsContracts
         List<TOViewModel> Read(TOBindingModel model);
 
         void CreateTO(CreateTOBindingModel model);
+        void Update(TOBindingModel model);
 
         void TakeTOInWork(ChangeTOStatusBindingModel model);
 

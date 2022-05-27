@@ -132,31 +132,53 @@ namespace STOEmployeeApp.Controllers
         }
 
         [HttpPost]
-        public void Create(int car, int work, decimal sum)
+        public void Create(int carId, int workId, int count)
         {
-            if (sum == 0)
+            if (carId == 0 || workId == 0 || count == 0)
             {
-                return;
+                Response.Redirect("Index");
             }
+            var worktype = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={workId}");
+            var dict = new Dictionary<int, (string, int)>();
+            dict.Add(worktype.Id, (worktype.WorkName, count));
             APIClient.PostRequest("api/main/createto",
             new CreateTOBindingModel
             {
                 EmployeeId = Program.Employee.Id,
-                CarId = car,
-                Sum = sum,
-                TOWorks = new Dictionary<int, (string, int)> { }
-            });
+                CarId = carId,
+                TOWorks = dict
+             });
             Response.Redirect("Index");
+            return;
+        }
+
+        [HttpGet]
+        public IActionResult Update(TOViewModel model)
+        {
+            return View(model);
+        }
+
+        [HttpPost]
+        public void Update(int workId, int toId, int count, decimal sum)
+        {
+            var worktype = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={workId}");
+            var newmodel = APIClient.GetRequest<TOViewModel>($"api/main/getto?toid={toId}");
+            newmodel.TOWorks.Add(workId, (worktype.WorkName, count));
+            APIClient.PostRequest("api/main/updateto", new TOBindingModel
+            {
+                Id = newmodel.Id,
+                CarId = newmodel.CarId,
+                Sum = sum,
+                TOWorks = newmodel.TOWorks
+            });
+
+            Response.Redirect("Index");
+            return;
         }
 
         public IActionResult Cars()
         {
-            if (Program.Employee == null)
-            {
-                return Redirect("~/Home/Enter");
-            }
-            return
-            View(APIClient.GetRequest<List<CarViewModel>>("api/main/getcarlist"));
+            return View(APIClient.GetRequest<List<CarViewModel>>("api/main/getcarlist"));
         }
 
         [HttpGet]
@@ -194,13 +216,14 @@ namespace STOEmployeeApp.Controllers
             }
             throw new Exception("Введите марку, модель, VIN и номер телефона владельца");
         }
-        //[HttpPost]
-        //public decimal Calc(List<(int, int)> list)
-        //{
-        //    var works =
-        //    APIClient.GetRequest<WorkViewModel>($"api/main/getworks?dishId={dish}");
-        //    return count * dis.Price;
-        //}
+
+        [HttpPost]
+        public decimal Calc(int count, int workId)
+        {
+            var price =
+            APIClient.GetRequest<decimal>($"api/main/getwork?workId={workId}");
+            return count * price;
+        }
 
         //[HttpGet]
         //public IActionResult Messages()

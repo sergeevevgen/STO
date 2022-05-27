@@ -88,6 +88,9 @@
                         @Html.DisplayFor(modelItem =>
                         item.DateOver)
                     </td>
+                    <td>
+                        <a asp-action="Update" asp-route-Id="@item.Id">Изменить</a>
+                    </td>
                 </tr>
             }
         </tbody>

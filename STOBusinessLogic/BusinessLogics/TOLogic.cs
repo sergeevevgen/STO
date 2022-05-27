@@ -52,6 +52,12 @@ namespace STOBusinessLogic.BusinessLogics
             });
         }
 
+        public void Update(TOBindingModel model)
+        {
+            if (model.Id.HasValue)
+                _tOStorage.Update(model);
+        }
+
         public void CreateTO(CreateTOBindingModel model)
         {
             _tOStorage.Insert(new TOBindingModel
