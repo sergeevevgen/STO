@@ -68,7 +68,25 @@ namespace STOView
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (id != null)
+            {
+                var worktype = _logic.Read(new WorkBindingModel
+                {
+                    Id = id
+                })[0];
 
+                var listSpareParts = worktype.WorkSpareParts.ToList();
+                foreach (var sparept in listSpareParts)
+                {
+                    SparePartViewModel current = _sparePartLogic.Read(new SparePartBindingModel
+                    {
+                        Id = sparept.Key
+                    })[0];
+                    ListBoxSparePartsWT.Items.Add(sparept);
+                }
+
+                TextBoxName.Text = worktype.WorkName;
+            }
         }
     }
 }

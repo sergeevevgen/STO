@@ -96,16 +96,6 @@ namespace STOView
                    MessageBoxImage.Error);
                 }
 
-
-
-               /* var sparepart = _logic.Read(new SparePartBindingModel
-                {
-                    Id = id
-                })[0];
-
-                TextBoxName.Text = sparepart.SparePartName;
-                TextBoxFactoryNum.Text = sparepart.FactoryNumber;
-                sparepart.Price = Convert.ToDecimal(TextBoxPrice.Text);*/
             }
         }
     }
