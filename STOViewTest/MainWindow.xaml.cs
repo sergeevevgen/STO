@@ -32,19 +32,19 @@ namespace STOViewTest
             form.ShowDialog();
         }
 
-        private void MenuItemLunchSeminar_Click(object sender, RoutedEventArgs e)
+        private void MenuItemSparePartsAdd_Click(object sender, RoutedEventArgs e)
         {
            /* var form = App.Container.Resolve<LinkLunchSeminarWindow>();
             form.ShowDialog();*/
         }
 
-        private void MenuItemRooms_Click(object sender, RoutedEventArgs e)
+        private void MenuItemSpareParts_Click(object sender, RoutedEventArgs e)
         {
             var form = App.Container.Resolve<SparePartWindow>();
             form.ShowDialog();
         }
 
-        private void MenuItemRoomers_Click(object sender, RoutedEventArgs e)
+        private void MenuItemTimeOfWorks_Click(object sender, RoutedEventArgs e)
         {
             var form = App.Container.Resolve<WorkTimeWindow>();
             form.ShowDialog();

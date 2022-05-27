@@ -9,12 +9,13 @@
     <Grid>
         <Menu Height="25" VerticalAlignment="Top">
             <MenuItem x:Name="MenuItemWorks" Header="Работы" Click="MenuItemWorks_Click"></MenuItem>
-            <MenuItem x:Name="MenuItemSparePartsAdd" Header="Привязка запчастей" Click="MenuItemLunchSeminar_Click"></MenuItem>
-            <MenuItem x:Name="MenuItemSpareParts" Header="Запчасти" Click="MenuItemRooms_Click"></MenuItem>
-            <MenuItem x:Name="MenuItemTimeOfWorks" Header="Продолжительность работ" Click="MenuItemRoomers_Click"></MenuItem>
+            <MenuItem x:Name="MenuItemSparePartsAdd" Header="Привязка запчастей" Click="MenuItemSparePartsAdd_Click"></MenuItem>
+            <MenuItem x:Name="MenuItemSpareParts" Header="Запчасти" Click="MenuItemSpareParts_Click"></MenuItem>
+            <MenuItem x:Name="MenuItemTimeOfWorks" Header="Продолжительность работ" Click="MenuItemTimeOfWorks_Click"></MenuItem>
             <MenuItem x:Name="MenuItemWorkTypeAdd" Header="Добавить тип работ" Click="MenuAddWorkType_Click"></MenuItem>
             <MenuItem x:Name="MenuItemStorePartReport" Header="Отчёт по запчастям" Click="MenuItemReport_Click"></MenuItem>
             <MenuItem x:Name="MenuItemExit" Header="Выход" Click="MenuItemExit_Click" Margin="150,0,0,0"></MenuItem>
         </Menu>
+        <Image Source="Image/Logo.jpg" Margin="0,25,0,0"/>
     </Grid>
 </Window>

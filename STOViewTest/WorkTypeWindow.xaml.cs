@@ -85,33 +85,29 @@ namespace STOView
             {
                 ComboBoxTimeOfWork.ItemsSource = list;
             }
-            var xa = _sparePartLogic.Read(null);
+            /*var xa = _sparePartLogic.Read(null);
             if (xa != null)
             {
                 ComboBoxSparePartsWT.ItemsSource = xa;
-            }
-            /*if (id != null)
+            }*/
+            if (id != null)
             {
-                var worktype = _logic.Read(new WorkBindingModel
+                var sparepart = _sparePartLogic.Read(new SparePartBindingModel
                 {
                     Id = id
                 })[0];
-                var listSpareParts = worktype.WorkSpareParts.ToList();
-                foreach (var sparept in listSpareParts)
+                var listSpareParts = sparepart.SpareParts.ToList();
+                foreach (var sppart in listSpareParts)
                 {
-                    var timeofw = _timeOfWorkLogic.Read(null);
-                    if (list != null)
+                    SparePartViewModel current = _sparePartLogic.Read(new SparePartBindingModel
                     {
-                        ListBoxSparePartsWT.Items.Add(timeofw);
-                    }
-                    /*SparePartViewModel current А= _sparePartLogic.Read(new SparePartBindingModel
-                    {
-                        Id = sparept.Key
+                        Id = sppart.Key
                     })[0];
-                    ListBoxSparePartsWT.Items.Add(sparept);
-        }
-                TextBoxName.Text = worktype.WorkName;
-            }*/
+                    SparePartsListBox.Items.Add(sppart);
+                }
+
+                TextBoxName.Text = sparepart.SparePartName;
+            }
         }
     }
 }
