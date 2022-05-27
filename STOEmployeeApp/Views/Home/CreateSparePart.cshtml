@@ -8,13 +8,13 @@
     <div class="row">
         <div class="col-4">Наименование:</div>
         <div class="col-8">
-            <input type="text" name="name" id="name"/>
+            <input type="text" name="partName" id="name"/>
         </div>
     </div>
     <div class="row">
         <div class="col-4">Заводской номер:</div>
         <div class="col-8">
-            <input type="text" name="factoryNumber" id="factoryNumber"/>
+            <input type="text" name="factoryNum" id="factoryNumber"/>
         </div>
     </div>
     <div class="row">
@@ -26,13 +26,13 @@
     <div class="row">
         <div class="col-4">Статус:</div>
         <div class="col-8">
-            <select id="status" name="status" class="form-control" asp-items="@(new SelectList(@ViewBag.Statuses,"Id", "Name"))"></select>
+            <select id="status" name="status" class="form-control" asp-items="@(new SelectList(@ViewBag.Statuses))"></select>
         </div>
     </div>
     <div class="row">
         <div class="col-4">Единица измерения:</div>
         <div class="col-8">
-            <select id="um" name="um" class="form-control" asp-items="@(new SelectList(@ViewBag.UMs,"Id", "Name"))"></select>
+            <select id="um" name="um" class="form-control" asp-items="@(new SelectList(@ViewBag.UMs))"></select>
         </div>
     </div>
     <div class="row">

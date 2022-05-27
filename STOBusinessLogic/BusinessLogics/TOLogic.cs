@@ -63,6 +63,7 @@ namespace STOBusinessLogic.BusinessLogics
             _tOStorage.Insert(new TOBindingModel
             {
                 CarId = model.CarId,
+                EmployeeId = model.EmployeeId,
                 TOWorks = model.TOWorks,
                 Sum = model.Sum,
                 Status = TOStatus.Принят,

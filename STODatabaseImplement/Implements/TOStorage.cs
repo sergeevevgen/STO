@@ -78,6 +78,8 @@ namespace STODatabaseImplement.Implements
                 //а уже потом добавлять внешние ключи в таблицу TOCars, TOWorks
                 TO to = new TO()
                 {
+                    EmployeeId = model.EmployeeId.Value,
+                    CarId = model.CarId,
                     Sum = model.Sum,
                     Status = model.Status,
                     DateCreate = model.DateCreate,

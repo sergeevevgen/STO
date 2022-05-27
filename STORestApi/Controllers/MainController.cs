@@ -41,7 +41,7 @@ namespace STORestApi.Controllers
         public List<WorkTypeViewModel> GetWorkTypeList() => _work.ReadType(null)?.ToList();
 
         [HttpGet]
-        public WorkTypeViewModel GetWorkType(int workid) => _work.ReadType(new WorkTypeBindingModel {Id = workid })?[0];
+        public WorkTypeViewModel GetWorkType(int workid) => _work.ReadType(new WorkTypeBindingModel { Id = workid })?[0];
 
         [HttpGet]
         public decimal GetWork(int workId) => _work.Read(new WorkBindingModel { Id = workId })[0].NetPrice;

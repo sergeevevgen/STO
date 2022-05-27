@@ -131,7 +131,7 @@ namespace STOEmployeeApp.Controllers
         public IActionResult Create()
         {
             ViewBag.Cars = APIClient.GetRequest<List<CarViewModel>>("api/main/getcarlist");
-            ViewBag.Works = new MultiSelectList(APIClient.GetRequest<List<WorkTypeViewModel>>("api/main/getworktypelist"), "Id", "WorkName", "Hours");
+            ViewBag.Works = APIClient.GetRequest<List<WorkTypeViewModel>>("api/main/getworktypelist");
             return View();
         }
 
@@ -141,7 +141,7 @@ namespace STOEmployeeApp.Controllers
             var listworks = new List<WorkTypeViewModel>();
             foreach(var work in workId)
             {
-                listworks.Add(APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={workId}"));
+                listworks.Add(APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={work}"));
             }
             if (!(carId == 0) || listworks !=  null)
             {
@@ -252,13 +252,15 @@ namespace STOEmployeeApp.Controllers
         [HttpGet]
         public IActionResult CreateWork()
         {
+            ViewBag.WorkTypes = APIClient.GetRequest<List<WorkTypeViewModel>>($"api/main/getworktypelist");
+            ViewBag.Times = APIClient.GetRequest<List<TimeOfWorkViewModel>>($"api/main/gettimelist");
             return View();
         }
 
         [HttpPost]
-        public void CreateWork(int workId, decimal price)
+        public void CreateWork(int worktypeId, decimal price)
         {
-            var work = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={workId}");
+            var work = APIClient.GetRequest<WorkTypeViewModel>($"api/main/getworktype?workId={worktypeId}");
             if (work != null)
             {
                 APIClient.PostRequest("api/main/creatework",
@@ -269,7 +271,7 @@ namespace STOEmployeeApp.Controllers
                     Price = price,
                     NetPrice = price * 13,
                     WorkName = work.WorkName,
-                    WorkTypeId = workId
+                    WorkTypeId = worktypeId
                 });
                 Response.Redirect("Works");
             }
@@ -324,7 +326,8 @@ namespace STOEmployeeApp.Controllers
                 new WorkTypeBindingModel
                 {
                     WorkName = workName,
-                    TimeOfWorkId = timeId                    
+                    TimeOfWorkId = timeId,
+                    WorkSpareParts = new Dictionary<int, (string, decimal)> { }
                 });
                 Response.Redirect("Works");
             }
@@ -351,7 +354,8 @@ namespace STOEmployeeApp.Controllers
                 {
                     Id = worktypeId,
                     WorkName = workName,
-                    TimeOfWorkId = timeId
+                    TimeOfWorkId = timeId,
+                    WorkSpareParts = new Dictionary<int, (string, decimal)> { }
                 });
                 Response.Redirect("Works");
             }
@@ -373,13 +377,15 @@ namespace STOEmployeeApp.Controllers
         [HttpGet]
         public IActionResult CreateSparePart()
         {
+            ViewBag.Statuses = new List<string>() { "БУ", "Новая"};
+            ViewBag.UMs = new List<string>() { "шт", "кг", "л"};
             return View();
         }
 
         [HttpPost]
         public void CreateSparePart(string partName, string factoryNum, decimal price, string status, string um)
         {
-            if (!string.IsNullOrEmpty(partName) && !string.IsNullOrEmpty(factoryNum) && price != 0 && !string.IsNullOrEmpty(status) && !string.IsNullOrEmpty(um))
+            if (!string.IsNullOrEmpty(partName) && !string.IsNullOrEmpty(factoryNum) && price > 0 && !string.IsNullOrEmpty(status) && !string.IsNullOrEmpty(um))
             {
                 APIClient.PostRequest("api/main/createpart",
                 new SparePartBindingModel
@@ -387,8 +393,8 @@ namespace STOEmployeeApp.Controllers
                     SparePartName = partName,
                     FactoryNumber = factoryNum,
                     Price = price,
-                    Status = STOContracts.Enums.SparePartStatus.БУ,
-                    UMeasurement = STOContracts.Enums.UnitMeasurement.шт
+                    Status = (STOContracts.Enums.SparePartStatus) Enum.Parse(typeof(STOContracts.Enums.SparePartStatus), status),
+                    UMeasurement = (STOContracts.Enums.UnitMeasurement) Enum.Parse(typeof (STOContracts.Enums.UnitMeasurement), um)
                 });
                 Response.Redirect("SpareParts");
             }
@@ -421,8 +427,8 @@ namespace STOEmployeeApp.Controllers
                     SparePartName = partName,
                     FactoryNumber = factoryNum,
                     Price = price,
-                    Status = STOContracts.Enums.SparePartStatus.БУ,
-                    UMeasurement = STOContracts.Enums.UnitMeasurement.шт
+                    Status = (STOContracts.Enums.SparePartStatus)Enum.Parse(typeof(STOContracts.Enums.SparePartStatus), status),
+                    UMeasurement = (STOContracts.Enums.UnitMeasurement)Enum.Parse(typeof(STOContracts.Enums.UnitMeasurement), um)
                 });
                 Response.Redirect("SpareParts");
             }

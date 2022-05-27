@@ -10,6 +10,6 @@ namespace STOContracts.Enums
     {
         БУ = 0,
 
-        Оригинал = 1
+        Новая = 1
     }
 }
