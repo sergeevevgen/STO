@@ -44,6 +44,16 @@ namespace STOView
                 MessageBox.Show("Введите название типа работ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (string.IsNullOrEmpty(ComboBoxTimeOfWork.Text))
+            {
+                MessageBox.Show("Выберите время работы", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(ComboBoxSparePartsWT.Text))
+            {
+                MessageBox.Show("Выберите запчасть", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             try
             {
                 _logic.CreateOrUpdate(new WorkTypeBindingModel
@@ -72,21 +82,20 @@ namespace STOView
         {
             var list = _timeOfWorkLogic.Read(null);
             if (list != null)
-                {
-                    ComboBoxTimeOfWork.ItemsSource = list;
-                }
+            {
+                ComboBoxTimeOfWork.ItemsSource = list;
+            }
             var xa = _sparePartLogic.Read(null);
             if (xa != null)
-                {
-                    ComboBoxSparePartsWT.ItemsSource = xa;
-                }
+            {
+                ComboBoxSparePartsWT.ItemsSource = xa;
+            }
             /*if (id != null)
             {
                 var worktype = _logic.Read(new WorkBindingModel
                 {
                     Id = id
                 })[0];
-
                 var listSpareParts = worktype.WorkSpareParts.ToList();
                 foreach (var sparept in listSpareParts)
                 {
@@ -95,13 +104,12 @@ namespace STOView
                     {
                         ListBoxSparePartsWT.Items.Add(timeofw);
                     }
-                    /*SparePartViewModel current = _sparePartLogic.Read(new SparePartBindingModel
+                    /*SparePartViewModel current А= _sparePartLogic.Read(new SparePartBindingModel
                     {
                         Id = sparept.Key
                     })[0];
                     ListBoxSparePartsWT.Items.Add(sparept);
         }
-
                 TextBoxName.Text = worktype.WorkName;
             }*/
         }

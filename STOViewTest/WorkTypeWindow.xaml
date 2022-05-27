@@ -11,7 +11,7 @@
             <RowDefinition Height="0*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel VerticalAlignment="Top"  HorizontalAlignment="Center" MinWidth="150px" Height="239" Width="300" ScrollViewer.HorizontalScrollBarVisibility="Auto" UseLayoutRounding="False" Grid.RowSpan="2" >
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" MinWidth="150px" Height="239" Width="300" ScrollViewer.HorizontalScrollBarVisibility="Auto" UseLayoutRounding="False" Grid.RowSpan="2" >
             <Label Content="Название:"  Margin="0,0,0,0" Height="35"/>
             <TextBox x:Name="TextBoxName"/>
             <Label Content="Привязанные запчасти:" />
