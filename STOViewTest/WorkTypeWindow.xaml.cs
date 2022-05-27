@@ -70,11 +70,17 @@ namespace STOView
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ComboBoxTimeOfWork.ItemsSource = _timeOfWorkLogic.Read(new TimeOfWorkBindingModel
-            {
-                Id = id
-            });
-            if (id != null)
+            var list = _timeOfWorkLogic.Read(null);
+            if (list != null)
+                {
+                    ComboBoxTimeOfWork.ItemsSource = list;
+                }
+            var xa = _sparePartLogic.Read(null);
+            if (xa != null)
+                {
+                    ComboBoxSparePartsWT.ItemsSource = xa;
+                }
+            /*if (id != null)
             {
                 var worktype = _logic.Read(new WorkBindingModel
                 {
@@ -84,15 +90,20 @@ namespace STOView
                 var listSpareParts = worktype.WorkSpareParts.ToList();
                 foreach (var sparept in listSpareParts)
                 {
-                    SparePartViewModel current = _sparePartLogic.Read(new SparePartBindingModel
+                    var timeofw = _timeOfWorkLogic.Read(null);
+                    if (list != null)
+                    {
+                        ListBoxSparePartsWT.Items.Add(timeofw);
+                    }
+                    /*SparePartViewModel current = _sparePartLogic.Read(new SparePartBindingModel
                     {
                         Id = sparept.Key
                     })[0];
                     ListBoxSparePartsWT.Items.Add(sparept);
-                }
+        }
 
                 TextBoxName.Text = worktype.WorkName;
-            }
+            }*/
         }
     }
 }
